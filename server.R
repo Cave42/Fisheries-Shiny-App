@@ -5,12 +5,23 @@ library(fields)
 library(ggrepel)
 library(ggplot2)
 
+library(readxl)
+library(httr)
+
 #library(scales)
 #library(lubridate)
 #library(tidyr)
 #library(dplyr)
 
-quad.plot.WC <- data.frame(read.csv("C:/Users/Guest_a/Downloads/WC_quadplot_2019.csv"))
+#packageVersion("readxl")
+
+#quad.plot.WC <- data.frame(read.csv("C:/Users/Guest_a/Downloads/WC_quadplot_2019.csv"))
+
+#quad.plot.WC <- data.frame(read.csv("https://raw.githubusercontent.com/Cave42/Fisheries-Shiny-App/main/WC_quadplot_2019.csv"))
+
+#quad.plot.WC <- data.frame(read.csv("https://raw.githubusercontent.com/Cave42/Fisheries-Shiny-App/main/WC_quadplot_2019.csv"))
+
+quad.plot.WC <- data.frame(read.csv("https://raw.githubusercontent.com/Cave42/Fisheries-Shiny-App/main/Fisheries_Updated_File.csv"))
 
 function(input, output){
  
