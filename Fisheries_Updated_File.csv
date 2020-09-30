@@ -42,12 +42,11 @@ Yelloweye,Yelloweye,7.03E+02,9.11E+02,0.00559722,0.0218466,0.771351471,0.2562055
 Ytail N,Yellowtail,11.2782,5.99859,,,1.880141833,0.294,0.294,NA,NA,24,2017,Scorpaenids
 Greenstrp,Greenstriped,5.53E+09,2.84E+09,0.000386307,0.0442455,1.95E+00,0.00873099,,,,24,2019,Scorpaenids
 SpinyDog,SpinyD,43623.9,28289.5,0.0100064,0.015971,1.542052705,0.626535596,,,,21,2019,Other
-,,,,,,,,,,,,,
 Blackgill,Blackgill,812499,825475,NA,NA,0.984280566,0.345999986,,,,24,2017,Scorpaenids
-Blue_Deacon_CA,Blu_Dec_CA,812.487,871.072,NA,NA,0.932743792,0.667999983,,,,24,2017,
-Brown,Brown,NA,NA,NA,NA,1.06400001,0.657999992,,,,24,2013,
+Blue_Deacon_CA,Blu_Dec_CA,812.487,871.072,NA,NA,0.932743792,0.667999983,,,,24,2017,Scorpaenids
+Brown,Brown,NA,NA,NA,NA,1.06400001,0.657999992,,,,24,2013,Scorpaenids
 Canary,Canary,4215.49,2984.33,NA,NA,1.412541508,0.150000006,NA,NA,NA,24,2017,Scorpaenids
-Copper,Copper,NA,NA,NA,NA,1.470000029,0.331999987,,,,24,2013,
+Copper,Copper,NA,NA,NA,NA,1.470000029,0.331999987,,,,24,2013,Scorpaenids
 Cowcod,Cowcod,524,620,NA,NA,0.84516129,0.016000001,0.088355981,NA,NA,24,2013,Scorpaenids
 Darkblotched,Darkblotched,1418720000,1417720000,NA,NA,1.000705358,0.280000001,NA,NA,NA,24,2017,Scorpaenids
 Hake,P. Hake,,,NA,NA,2.23,0.688000023,NA,NA,NA,21,2017,Other
@@ -58,7 +57,6 @@ Spiny_dogfish,Dogfish,NA,NA,NA,NA,1.578999996,0.381999999,,,,21,2011,Other
 SST,SST,140753,75906.1,NA,NA,1.853999972,0.372999996,0.393977947,NA,NA,24,2013,Scorpaenids
 Widow,Widow,35134.4,28450.6,NA,NA,1.876999974,0.114,NA,NA,NA,24,2015,Scorpaenids
 Yelloweye,Yelloweye,6.46E+02,9.11E+02,NA,NA,0.709205179,0.187999994,0.187999994,8,32,24,2017,Scorpaenids
-,,,,,,,,,,,,,
 ATF,Arrowtooth,63301.5,32125.5,0.0389767,0.190847,1.97044404,0.20423009,0.404469937,4090,10112,22,2007,Flatfishes
 Black_CA,Black_CA,353.216,424.609,0.0705773,0.0637095,0.831861783,1.10779868,NA,NA,NA,24,2015,Scorpaenids
 Black_OR,Black_OR,838.216,553.819,0.0911241,0.116731,1.51351976,0.780633251,NA,NA,NA,24,2015,Scorpaenids
@@ -88,9 +86,8 @@ Rougheye,Rougheye,5104.71,4315.08,0.0229109,0.026793,1.182993131,0.855107677,0.9
 China_S,China_S,18.5653,26.6047,0.038234691,0.0475505,0.69782031,0.804086,NA,NA,NA,24,2015,Scorpaenids
 China_C,China_C,40.0329,26.0408,0.018647046,0.0483668,1.537314522,0.385534,NA,NA,NA,24,2015,Scorpaenids
 China_N,China_N,17.9497,9.77652,0.013418764,0.0458324,1.836000949,0.292779,NA,NA,NA,24,2015,Scorpaenids
-,,,,,,,,,,,,,
 ATF,Arrowtooth,,,,,1.97,0.412,0.404469937,4090,10112,24,2007,Flatfishes
-Black_N,Black,,,,,1.38,0.698,0.42887931,199,464,24,2007,
+Black_N,Black,,,,,1.38,0.698,0.42887931,199,464,24,2007,Scorpaenids
 Bocaccio,Bocaccio,,,,,0.785618379,0.190589709,0.190589709,NA,NA,25,2013,Scorpaenids
 Cabezon,Cabezon,,,,,1.230192129,0.455,0.423423423,47,111,22,2009,Other
 Cowcod,Cowcod,,,,,0.846265168,0.088355981,0.088355981,NA,NA,25,2013,Scorpaenids
@@ -105,7 +102,7 @@ Petrale,Petrale,,,,,0.892092019,0.8684392,0.8684392,NA,NA,25,2013,Flatfishes
 POP,POP,,,,,0.478,0.26,0.135549872,159,1173,21,2011,Scorpaenids
 Rex,Rex,,,,,3.2,0.186595714,0.186595714,NA,NA,25,2013,Flatfishes
 Sablefish,Sablefish,,,,,0.837,1.04,0.7782332,7215,9271,21,2011,Other
-Shortbelly,Shortbelly,,,,,1.667,0,0.001007194,7,6950,24,2007,
+Shortbelly,Shortbelly,,,,,1.667,0,0.001007194,7,6950,24,2007,Scorpaenids
 Splitnose,Splitnose,,,,,1.6,0.132,0.303687636,140,461,22,2009,Scorpaenids
 SST,SST,,,,,1.854306642,0.393977947,0.393977947,NA,NA,25,2013,Scorpaenids
 Widow,Widow,,,,,1.277,0.05,0.024938734,173,6937,21,2011,Scorpaenids
@@ -113,7 +110,6 @@ Yelloweye,Yelloweye,,,,,0.534,0.33,0.25,8,32,21,2011,Scorpaenids
 Ytail_N,Yellowtail,,,,,1.6675,0.343266745,0.343266745,NA,NA,25,2013,Scorpaenids
 Aurora,Aurora,,,,,1.59300519,0.614296,0.614296,NA,NA,25,2013,Scorpaenids
 Rougheye,Rougheye,,,,,1.182795699,0.98,0.98,NA,NA,25,2013,Scorpaenids
-,,,,,,,,,,,,,
 Bocaccio,Bocaccio,,,,,0.649,0.145,0.090794451,72,793,21,2011,Scorpaenids
 Cabezon,Cabezon,,,,,1.169,0.455,0.423423423,47,111,22,2009,Other
 Canary,Canary,,,,,0.576,0.234,0.045744681,43,940,21,2011,Scorpaenids
@@ -123,17 +119,16 @@ Darkblotched,Darkblotched,,,,,0.755,0.742,0.754545455,332,440,21,2011,Scorpaenid
 English,English,,,,,2.909,0.167,0.031913802,311,9745,24,2007,Flatfishes
 Hake,Hake,,,,,3.152,0.621,0.492384716,165717,336560,21,2011,Other
 Petrale,Petrale,,,,,0.718,0.747,0.340239913,936,2751,21,2011,Flatfishes
-,,,,,,,,,,,,,
-Black rockfish - Southern Pacific Coast,Black_S,,,,,1.762,0.47,NA,650,1317,,2007,
+Black rockfish - Southern Pacific Coast,Black_S,,,,,1.762,0.47,NA,650,1317,,2007,Scorpaenids
 Blackgill rockfish - Southern California,Blackgill,,,,,1.31,0.55,0.358943512,NA,NA,,2005,Scorpaenids
-Blue rockfish - California,Blue,,,,,0.749,1.227,NA,NA,NA,,2007,
+Blue rockfish - California,Blue,,,,,0.749,1.227,NA,NA,NA,,2007,Scorpaenids
 Bocaccio - Southern Pacific Coast,Bocaccio,,,,,0.703,0.1,0.12,NA,NA,,2007,Scorpaenids
-California scorpionfish - Southern California,Scorpionfish,,,,,2,0.688,0.4,NA,NA,,2005,
+California scorpionfish - Southern California,Scorpionfish,,,,,2,0.688,0.4,NA,NA,,2005,Scorpaenids
 Canary rockfish - Pacific Coast,Canary,,,,,0.593,0.1,0.211163068,NA,NA,,2007,Scorpaenids
 Darkblotched rockfish - Pacific Coast,Darkblotched,,,,,0.689,0.59,0.68,NA,NA,,2009,Scorpaenids
 Dover sole - Pacific Coast,Dover,,,,,1.58,0.415,0.9,NA,NA,,2005,Flatfishes
-Gopher rockfish - Northern California,Gopher,,,,,2.42,0.2422,NA,NA,NA,,2005,
-Kelp greenling - Oregon,Kelp_greenling,,,,,1.23,0.802,NA,NA,NA,,2005,
+Gopher rockfish - Northern California,Gopher,,,,,2.42,0.2422,NA,NA,NA,,2005,Scorpaenids
+Kelp greenling - Oregon,Kelp_greenling,,,,,1.23,0.802,NA,NA,NA,,2005,Other
 Longspine thornyhead - Pacific Coast,LST,,,,,1.78,0.314,0.35,NA,NA,,2005,Scorpaenids
 Pacific hake - Pacific Coast,Hake,,,,,0.743,0.903,0.517,NA,NA,,2010,Other
 Pacific ocean perch - Pacific Coast,POP,,,,,0.714,0.146,0.09,NA,NA,,2009,Scorpaenids
@@ -141,17 +136,16 @@ Petrale sole - Pacific Coast,Petrale,,,,,0.464,1.214,0.99,NA,NA,,2009,Flatfishes
 Sablefish - Pacific Coast,Sablefish,,,,,0.958,0.618,0.79,NA,NA,,2007,Other
 Shortspine thornyhead - Pacific Coast,SST,,,,,1.57,0.46,0.79,NA,NA,,2005,Scorpaenids
 Splitnose rockfish - Pacific Coast,Splitnose,,,,,1.6,0.13,0.148292683,NA,NA,,2009,Scorpaenids
-Starry flounder - Pacific Coast,StarryF,,,,,1.25,0.318333333,0.018687873,NA,NA,,2005,
+Starry flounder - Pacific Coast,StarryF,,,,,1.25,0.318333333,0.018687873,NA,NA,,2005,Flatfishes
 Widow rockfish - Pacific Coast,Widow,,,,,0.963,0.07,0.070157159,NA,NA,,2009,Scorpaenids
 Yelloweye rockfish - Pacific Coast,Yelloweye,,,,,0.507,0.414,0.22282957,NA,NA,,2009,Scorpaenids
 Yellowtail rockfish - Northern Pacific Coast,Yellowtail,,,,,1.36,0.506,0.134024087,NA,NA,,2005,Scorpaenids
 greenstriped rockfish,Greenstriped,,,,,2.023,0.016,NA,NA,NA,,2009,Scorpaenids
-,,,,,,,,,,,,,
 Sablefish,Sablefish,,,,,0.861694919,,,,,,2001,Other
 SST,SST,,,,,0.8424342,,,,,,2000,Scorpaenids
 Dover,Dover,,,,,0.588379275,,,,,,2000,Flatfishes
 Yelloweye,Yelloweye,,,,,0.317955112,,,,,,2000,Scorpaenids
-Black,Black,,,,,1.145681639,,,,,,2001,
+Black,Black,,,,,1.145681639,,,,,,2001,Scorpaenids
 Canary,Canary,,,,,0.165345164,,,,,,2001,Scorpaenids
 Hake,Hake,,,,,1.414175378,,,,,,2001,Other
 Bocaccio,Bocaccio,,,,,0.544077135,,,,,,2001,Scorpaenids
