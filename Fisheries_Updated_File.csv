@@ -141,6 +141,7 @@ Widow rockfish - Pacific Coast,Widow,,,,,0.963,0.07,0.070157159,NA,NA,,2009,Scor
 Yelloweye rockfish - Pacific Coast,Yelloweye,,,,,0.507,0.414,0.22282957,NA,NA,,2009,Scorpaenids
 Yellowtail rockfish - Northern Pacific Coast,Yellowtail,,,,,1.36,0.506,0.134024087,NA,NA,,2005,Scorpaenids
 greenstriped rockfish,Greenstriped,,,,,2.023,0.016,NA,NA,NA,,2009,Scorpaenids
+<<<<<<< Updated upstream
 Sablefish,Sablefish,,,,,0.861694919,,,,,,2001,Other
 SST,SST,,,,,0.8424342,,,,,,2000,Scorpaenids
 Dover,Dover,,,,,0.588379275,,,,,,2000,Flatfishes
@@ -156,3 +157,20 @@ Darkblotched,Darkblotched,,,,,0.304290352,,,,,,2001,Scorpaenids
 Cowcod,Cowcod,,,,,0.059674071,,,,,,2001,Scorpaenids
 POP,POP,,,,,0.644367831,,,,,,2001,Scorpaenids
 Petrale,Petrale,,,,,0.396236046,,,,,,2001,Flatfishes
+=======
+Sablefish,Sablefish,,,,,0.861694919,,0.861612664,,,,2001,Other
+SST,SST,,,,,0.8424342,,0.346550357,,,,2000,Scorpaenids
+Dover,Dover,,,,,0.588379275,,1.1105453,,,,2000,Flatfishes
+Yelloweye,Yelloweye,,,,,0.317955112,,0.392307692,,,,2000,Scorpaenids
+Black,Black,,,,,1.145681639,,0.689686099,,,,2001,Scorpaenids
+Canary,Canary,,,,,0.165345164,,0.394736842,,,,2001,Scorpaenids
+Hake,Hake,,,,,1.414175378,,0.991596639,,,,2001,Other
+Bocaccio,Bocaccio,,,,,0.544077135,,1.081967213,,,,2001,Scorpaenids
+Widow,Widow,,,,,0.63811779,,0.573038445,,,,2001,Scorpaenids
+Yellowtail,Yellowtail,,,,,1.390790027,,1.054990464,,,,2001,Scorpaenids
+Lingcod,Lingcod,,,,,0.500973252,,0.840416667,,,,1999,Other
+Darkblotched,Darkblotched,,,,,0.304290352,,0.566225166,,,,2001,Scorpaenids
+Cowcod,Cowcod,,,,,0.059674071,,0.208333333,,,,2001,Scorpaenids
+POP,POP,,,,,0.644367831,,0.199221285,,,,2001,Scorpaenids
+Petrale,Petrale,,,,,0.396236046,,0.709268646,,,,2001,Flatfishes
+>>>>>>> Stashed changes
