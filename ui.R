@@ -6,7 +6,7 @@ library(shinyWidgets)
 #quad.plot.WC <- data.frame(read.csv("https://raw.githubusercontent.com/Cave42/Fisheries-Shiny-App/main/Fisheries_Updated_File.csv"))
 quad.plot.WC <- data.frame(read.csv(paste0(getwd(),"/Fisheries_Updated_File.csv")))
 
-quad.plot.WC <- data.frame(read.csv("https://raw.githubusercontent.com/Cave42/Fisheries-Shiny-App/main/Fisheries_Updated_File.csv"))
+#quad.plot.WC <- data.frame(read.csv("https://raw.githubusercontent.com/Cave42/Fisheries-Shiny-App/main/Fisheries_Updated_File.csv"))
 
 fluidPage(
 
@@ -25,19 +25,19 @@ fluidPage(
         
     #sidebarPanel(
         
-<<<<<<< Updated upstream
+
     # Species Type options for graph
     #checkboxGroupInput("checkGroup", label = h3("Checkbox group"), 
     #                   choices = list("Flatfishes", "Other", "Scorpaenids"), selected = list("Flatfishes", "Other", "Scorpaenids")),
     
     #Species Type options for graph
-    checkboxGroupInput("checkGroup", label = h3("Checkbox group"), 
-                       choices = unique(quad.plot.WC$Spp_type), selected = unique(quad.plot.WC$Spp_type)),
+    #checkboxGroupInput("checkGroup", label = h3("Checkbox group"), 
+     #                  choices = unique(quad.plot.WC$Spp_type), selected = unique(quad.plot.WC$Spp_type)),
       
     #Year options for graph
-    checkboxGroupInput("checkGroup2", label = h3("Checkbox group"), 
-                       choices = unique(quad.plot.WC$Assessment_Year), selected = unique(quad.plot.WC$Assessment_Year)),
-=======
+    #checkboxGroupInput("checkGroup2", label = h3("Checkbox group"), 
+    #                   choices = unique(quad.plot.WC$Assessment_Year), selected = unique(quad.plot.WC$Assessment_Year)),
+
     #Species Type options for graph
     #checkboxGroupInput("checkGroup3", label = h3("Checkbox group"), 
      #                  choices = list("F.Fmsy", 
@@ -85,7 +85,7 @@ fluidPage(
     icon = icon("gear"), width = "300px",
     
     tooltip = tooltipOptions(title = "Click to see inputs !")
->>>>>>> Stashed changes
+
     ),
     
     #Year options for graph

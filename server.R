@@ -7,7 +7,7 @@ library(ggplot2)
 
 library(readxl)
 library(httr)
-<<<<<<< Updated upstream
+
 
 #library(scales)
 #library(lubridate)
@@ -21,13 +21,12 @@ library(httr)
 #quad.plot.WC <- data.frame(read.csv("https://raw.githubusercontent.com/Cave42/Fisheries-Shiny-App/main/WC_quadplot_2019.csv"))
 
 #quad.plot.WC <- data.frame(read.csv("https://raw.githubusercontent.com/Cave42/Fisheries-Shiny-App/main/WC_quadplot_2019.csv"))
-=======
+
 library(shinyWidgets)
 library(shinythemes)
 
 #install.packages("shinyWidgets")
 #install.packages("shinythemes")
->>>>>>> Stashed changes
 
 quad.plot.WC <- data.frame(read.csv(paste0(getwd(),"/Fisheries_Updated_File.csv")))
 
