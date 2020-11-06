@@ -1,45 +1,65 @@
 library(shiny)
 library(shinyWidgets)
 library(shinythemes)
+library(plotly)
 
 quad.plot.WC <- data.frame(read.csv(paste0(getwd(),"/Fisheries_Updated_File.csv")))
 
 fluidPage(theme = shinytheme("sandstone"),
 
   navbarPage("Fisheries Shiny App"),
-   
-  plotOutput(outputId = "distPlot"),
   
-  
-  fluidPage(style='padding-left:30px; padding-right:0px; padding-top:50px; padding-bottom:0px',
-            
-      radioGroupButtons(
-        inputId = "Id073",
-        label = "Fishing Intensity",
-        choices = c("F/Fmsy", 
-                    "TM_ABC"),
-        individual = TRUE,
-        size = "lg",
-        status = "Secondary",
-        
-        checkIcon = list(
-          yes = tags$i(class = "fa fa-circle", 
-                       style = "color: steelblue"),
-          no = tags$i(class = "fa fa-circle-o", 
-                      style = "color: steelblue"))
-      ),
+  #imageOutput("plot1"))
 
-      fluidRow(style='padding-left:15px; padding-right:0px; padding-top:0px; padding-bottom:10px',
-                
-      column(width = 1, offset = 0, style='padding-left:0px; padding-right:205px; padding-top:0px; padding-bottom:0px',
-               
-      dropdown(
+  plotOutput(outputId = "distPlot"),
+  plotlyOutput(outputId = "distPlot2"),
   
+  fluidPage(style='padding-left:35px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+    
+    column(width = 1, offset = 0, style='padding-left:0px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+    
+    dropdown(
+    
+      style = "default",
+      size = "normal",
+      icon = NULL,
+      label = "Species",
+      tooltip = FALSE,
+      right = FALSE,
+      up = FALSE,
+      width = NULL,
+      animate = animateOptions(enter = "fadeInDown", exit = "fadeOutUp", duration = 0.25),
+      inputId = NULL,
+        
+      column(width = 1, offset = 0, style='padding-left:0px; padding-right:150px; padding-top:0px; padding-bottom:0px',
+             
+        checkboxGroupButtons(
+        inputId = "Flatfishes1",
+        #label = "Flatfishes",
+          choices = "Flatfishes",
+          selected = NULL,
+          status = "Secondary",
+          checkIcon = list(
+            yes = icon("ok", 
+                       lib = "glyphicon"),
+            
+            no = icon("remove",
+                      lib = "glyphicon"))
+        ),
+    
+      awesomeCheckboxGroup(
+        inputId = "Flatfishes2",
+        label = "Flatfishes", 
+        choices = list("Arrowtooth", "Dover", "English", "Petrale", "Rex", "StarryF"),
+        selected = NULL),
+      ),
+      
+      column(width = 1, offset = 0, style='padding-left:0px; padding-right:150px; padding-top:0px; padding-bottom:0px',
+             
       checkboxGroupButtons(
-        inputId = "checkGroup",
-        label = "Species Group",
-        choices = unique(quad.plot.WC$Spp_type),
-        selected = unique(quad.plot.WC$Spp_type),
+        inputId = "Scorpaenids1",
+        choices = "Scorpaenids",
+        selected = NULL,
         status = "Secondary",
         checkIcon = list(
           yes = icon("ok", 
@@ -49,55 +69,41 @@ fluidPage(theme = shinytheme("sandstone"),
                     lib = "glyphicon"))
       ),
       
-      status = "Secondary",
-      style = "default",
-      size = "lg",
-      icon = NULL,
-      label = "Species Type",
-      tooltip = FALSE,
-      right = FALSE,
-      up = FALSE,
-      width = NULL,
-      animate = animateOptions(enter = "fadeInDown", exit = "fadeOutUp", duration = 0.25),
-      inputId = NULL
-    ),
-    
-        ),
-    
-    #column(1, offset = 1,), 
-    
-    column(width = 1, offset = 0, style='padding-left:0px; padding-right:0px; padding-top:0px; padding-bottom:0px',
-    
-    dropdown(
-    
-      switchInput(
-        inputId = "Switch1",
-        onLabel = "All",
-        offLabel = "None"
+      awesomeCheckboxGroup(
+        inputId = "Scorpaenids2",
+        label = "Scorpaenids", 
+        choices = list("Aurora", "Black", "Black_CA", "Black_OR", "Black_WA", "Blackgill", "Blu_Dec_CA", "Blue_CA", "Bocaccio", "Brown", "CA_scorp", "Canary", "Chilipepper", "China_C" ,"China_N" ,"China_S", "Copper", "Cowcod", "Darkblotched", "Gopher", "Gopher_BLKYL",
+                       "Greenstriped", "LST", "POP", "Rougheye", "Scorpionfish", "Sharpchin", "Shortbelly", "Splitnose", "SST", "Widow","Yelloweye", "Yellowtail"),
+        selected = NULL),
+      
       ),
-    
-    awesomeCheckboxGroup(
-      inputId = "checkGroup4",
-      label = "Species", 
-      choices = unique(quad.plot.WC$Abb2),
-      selected = unique(quad.plot.WC$Abb2)),
-    
-    status = "Secondary",
-    style = "default",
-    size = "lg",
-    icon = NULL,
-    label = "Species",
-    tooltip = FALSE,
-    right = FALSE,
-    up = FALSE,
-    width = NULL,
-    animate = animateOptions(enter = "fadeInDown", exit = "fadeOutUp", duration = 0.25),
-    inputId = NULL
+      
+      column(width = 1, offset = 0, style='padding-left:0px; padding-right:150px; padding-top:0px; padding-bottom:0px',
+             
+      checkboxGroupButtons(
+        inputId = "Other1",
+        choices = "Other",
+        selected = NULL,
+        status = "Secondary",
+        checkIcon = list(
+          yes = icon("ok", 
+                     lib = "glyphicon"),
+          
+          no = icon("remove",
+                    lib = "glyphicon"))
+      ),
+      
+      awesomeCheckboxGroup(
+      inputId = "Other2",
+      label = "Other", 
+      choices = list("Big_skate", "Cabezon_CA", "Cabezon_NCA", "Cabezon_OR", "Cabezon_SCA", "Dogfish", "Kelp_greenling", "Lingcod", "Lingcod_N", "Lingcod_S", "Longnose", "P. Hake", "Sablefish", "SpinyD"),
+      selected = NULL)
+      )
+    )
     ),
     
-    ),
     
-    column(width = 1, offset = 0, style= 'padding-left:20px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+    column(width = 1, offset = 0, style= 'padding-left:15px; padding-right:0px; padding-top:25px; padding-bottom:0px',
            
     dropdown(
       
@@ -110,12 +116,11 @@ fluidPage(theme = shinytheme("sandstone"),
     awesomeCheckboxGroup(
       inputId = "checkGroup2",
       label = "Year", 
-      choices = unique(quad.plot.WC$Asseslgent_Year),
-      selected = "2019"),
+      choices = list("1999", "2000", "2001", "2005", "2007", "2009", "2010", "2011", "2013", "2015","2017", "2019"),
+      selected = NULL),
     
-    status = "Secondary",
     style = "default",
-    size = "lg",
+    size = "normal",
     icon = NULL,
     label = "Year",
     tooltip = FALSE,
@@ -125,26 +130,30 @@ fluidPage(theme = shinytheme("sandstone"),
     animate = animateOptions(enter = "fadeInDown", exit = "fadeOutUp", duration = 0.25),
     inputId = NULL
     ),
-    )),
+    ),
    
-              
-  radioGroupButtons(
-    inputId = "YearSpecies1",
-    label = "Show Year Linkage",
-    choices = c("Yes", 
-                "No"),
-    individual = TRUE,
-    selected = "No",
-    size = "lg",
-    status = "Secondary",
+             
+    column(width = 1, offset = 0, style='padding-left:0px; padding-right:0px; padding-top:0px; padding-bottom:0px',
     
-    checkIcon = list(
-      yes = tags$i(class = "fa fa-circle", 
-                   style = "color: steelblue"),
-      no = tags$i(class = "fa fa-circle-o", 
-                  style = "color: steelblue"))
-  
-  )    
-  )
+    pickerInput(
+      inputId = "Id073",
+      label = "Y Axis", 
+      choices = c("F/Fmsy", "TM_ABC"),
+    ),
+    ),
+    
+  column(width = 5, offset = 0, style='padding-left:80px; padding-right:0px; padding-top:37px; padding-bottom:0px',           
+              
+  prettyCheckbox(
+    inputId = "YearSpecies1",
+    label = "Year Species Linkage", 
+    value = FALSE,
+    shape = c("curve"),
+    animation = "smooth",
+    bigger = TRUE,
 
   )
+  
+  )
+  
+  )) 
