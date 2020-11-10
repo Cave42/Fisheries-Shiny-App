@@ -10,11 +10,12 @@ fluidPage(theme = shinytheme("sandstone"),
   navbarPage("Fisheries Shiny App"),
   
   #imageOutput("plot1"))
-
-  plotOutput(outputId = "distPlot"),
-  plotlyOutput(outputId = "distPlot2"),
+  tabsetPanel(type = "tabs",
+              tabPanel("Plot", plotOutput(outputId = "distPlot")),
+              tabPanel("Animation", plotlyOutput(outputId = "distPlot2"))
+  ),
   
-  fluidPage(style='padding-left:35px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+    fluidPage(style='padding-left:35px; padding-right:0px; padding-top:0px; padding-bottom:0px',
     
     column(width = 1, offset = 0, style='padding-left:0px; padding-right:0px; padding-top:25px; padding-bottom:0px',
     
@@ -141,6 +142,29 @@ fluidPage(theme = shinytheme("sandstone"),
       choices = c("F/Fmsy", "TM_ABC"),
     ),
     ),
+  
+    column(width = 1, offset = 0, style= 'padding-left:60px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+           
+           dropdown(
+             
+            awesomeCheckboxGroup(
+            inputId = "ImageOptions",
+            label = "Label Options", 
+            choices = list("Images", "Labels"),
+            selected = list("Labels")),
+             
+             style = "default",
+             size = "normal",
+             icon = NULL,
+             label = "Label Options",
+             tooltip = FALSE,
+             right = FALSE,
+             up = FALSE,
+             width = NULL,
+             animate = animateOptions(enter = "fadeInDown", exit = "fadeOutUp", duration = 0.25),
+             inputId = NULL
+           ),
+    ),
     
   column(width = 5, offset = 0, style='padding-left:80px; padding-right:0px; padding-top:37px; padding-bottom:0px',           
               
@@ -152,8 +176,7 @@ fluidPage(theme = shinytheme("sandstone"),
     animation = "smooth",
     bigger = TRUE,
 
-  )
-  
-  )
+  ),
+  ),
   
   )) 

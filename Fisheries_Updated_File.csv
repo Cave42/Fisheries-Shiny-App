@@ -1,7 +1,7 @@
 Abb1,Abb2,B,Bmsy,F,Fmsy,B/Bmsy,F/Fmsy,TM_ABC,TM,ABC,pch_spp,Assessment_Year,Spp_type,Image
 Lingcod,Lingcod,,,,,0.500973252,,0.840416667,,,21,1999,Other,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/lingcod/lingcod.png?w=600&amp;mh=350&amp;bc=ffffff
 Dover,Dover,,,,,0.588379275,,1.1105453,,,22,2000,Flatfishes,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/flounder-halibut-plaice-sole-sanddab/dover-sole.png?mw=500&mh=300&bc=ffffff
-SST,SST,,,,,0.8424342,,0.346550357,,,,2000,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/mussel/farmed-mussels.png?mw=500&mh=300&bc=ffffff
+SST,SST,,,,,0.8424342,,0.346550357,,,,2000,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/longspine-thornyhead-rockfish.png?mw=500&mh=300&bc=ffffff
 Yelloweye,Yelloweye,,,,,0.317955112,,0.392307692,,,,2000,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/yelloweye-rockfish.png?mw=500&mh=300&bc=ffffff
 Black,Black,,,,,1.145681639,,0.689686099,,,24,2001,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/black-rockfish.png?mw=500&mh=300&bc=ffffff
 Bocaccio,Bocaccio,,,,,0.544077135,,1.081967213,,,,2001,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/bocaccio-rockfish.png?mw=500&mh=300&bc=ffffff
@@ -10,7 +10,7 @@ Cowcod,Cowcod,,,,,0.059674071,,0.208333333,,,24,2001,Scorpaenids,https://www.rec
 Darkblotched,Darkblotched,,,,,0.304290352,,0.566225166,,,24,2001,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/halfbanded-rockfish.png?mw=500&mh=300&bc=ffffff
 Pacific hake - Pacific Coast,P. Hake,,,,,1.414175378,,0.991596639,,,21,2001,Other,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/hake/pacific-hake.png?mw=500&mh=300&bc=ffffff
 Petrale,Petrale,,,,,0.396236046,,0.709268646,,,22,2001,Flatfishes,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/flounder-halibut-plaice-sole-sanddab/petrale-sole.png?mw=500&mh=300&bc=ffffff
-POP,POP,,,,,0.644367831,,0.199221285,,,24,2001,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/mussel/farmed-mussels.png?mw=500&mh=300&bc=ffffff
+POP,POP,,,,,0.644367831,,0.199221285,,,24,2001,Scorpaenids,https://upload.wikimedia.org/wikipedia/commons/8/84/Sebastes_alutus.png
 Sablefish,Sablefish,,,,,0.861694919,,0.861612664,,,21,2001,Other,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/sablefish/sablefish.png?w=600&amp;mh=350&amp;bc=ffffff
 Widow,Widow,,,,,0.63811779,,0.573038445,,,,2001,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/vermilion-rockfish.png?mw=500&mh=300&bc=ffffff
 Yellowtail,Yellowtail,,,,,1.390790027,,1.054990464,,,,2001,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/yellowtail-rockfish.png?mw=500&mh=300&bc=ffffff
@@ -18,9 +18,9 @@ Blackgill rockfish - Southern California,Blackgill,,,,,1.31,0.55,0.358943512,NA,
 Dover sole - Pacific Coast,Dover,,,,,1.58,0.415,0.9,NA,NA,22,2005,Flatfishes,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/flounder-halibut-plaice-sole-sanddab/dover-sole.png?mw=500&mh=300&bc=ffffff
 Gopher rockfish - Northern California,Gopher,,,,,2.42,0.2422,NA,NA,NA,24,2005,Scorpaenids,https://ian.umces.edu/imagelibrary/albums/userpics/12789/normal_ian-symbol-sebastes-carnatus.png
 Kelp greenling - Oregon,Kelp_greenling,,,,,1.23,0.802,NA,NA,NA,21,2005,Other,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/kelp-greenling/kelp-greenling.png?w=600&amp;mh=350&amp;bc=ffffff
-LST,LST,,,,,1.78,0.314,0.35,NA,NA,24,2005,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/mussel/farmed-mussels.png?mw=500&mh=300&bc=ffffff
+LST,LST,,,,,1.78,0.314,0.35,NA,NA,24,2005,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/longspine-thornyhead-rockfish.png?mw=500&mh=300&bc=ffffff
 California scorpionfish - Southern California,Scorpionfish,,,,,2,0.688,0.4,NA,NA,,2005,Scorpaenids,https://wildlife.ca.gov/Portals/0/Images/marine/sportfish/CaliforniaScorpionfish.jpg
-SST,SST,,,,,1.57,0.46,0.79,NA,NA,,2005,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/mussel/farmed-mussels.png?mw=500&mh=300&bc=ffffff
+SST,SST,,,,,1.57,0.46,0.79,NA,NA,,2005,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/longspine-thornyhead-rockfish.png?mw=500&mh=300&bc=ffffff
 Starry flounder - Pacific Coast,StarryF,,,,,1.25,0.318333333,0.018687873,NA,NA,,2005,Flatfishes,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/flounder-halibut-plaice-sole-sanddab/starry-flounder.png?mw=500&mh=300&bc=ffffff
 Yellowtail rockfish - Northern Pacific Coast,Yellowtail,,,,,1.36,0.506,0.134024087,NA,NA,,2005,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/yellowtail-rockfish.png?mw=500&mh=300&bc=ffffff
 ATF,Arrowtooth,63301.5,32125.5,0.0389767,0.190847,1.97044404,0.20423009,0.404469937,4090,10112,22,2007,Flatfishes,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/flounder-halibut-plaice-sole-sanddab/arrowtooth-flounder.png?mw=500&mh=300&bc=ffffff
@@ -46,8 +46,8 @@ greenstriped rockfish,Greenstriped,,,,,2.023,0.016,NA,NA,NA,24,2009,Scorpaenids,
 Lingcod,Lingcod,,,,,1.676,0.218,0.093186995,450,4829,21,2009,Other,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/lingcod/lingcod.png?w=600&amp;mh=350&amp;bc=ffffff
 Lingcod_N,Lingcod_N,20484.4,13230,0.016979207,0.0792288,1.548329554,0.214305997,0.093186995,450,4829,21,2009,Other,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/lingcod/lingcod.png?w=600&amp;mh=350&amp;bc=ffffff
 Petrale sole - Pacific Coast,Petrale,,,,,0.464,1.214,0.99,NA,NA,22,2009,Flatfishes,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/flounder-halibut-plaice-sole-sanddab/petrale-sole.png?mw=500&mh=300&bc=ffffff
-POP,POP,,,,,0.714,0.146,0.09,NA,NA,24,2009,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/mussel/farmed-mussels.png?mw=500&mh=300&bc=ffffff
-Splitnose,Splitnose,8.43E+09,5.01.E+09,0.00229961,0.0328037,1.683084299,0.070102153,0.303687636,140,461,24,2009,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/black-rockfish.png?mw=500&mh=300&bc=ffffff
+POP,POP,,,,,0.714,0.146,0.09,NA,NA,24,2009,Scorpaenids,https://upload.wikimedia.org/wikipedia/commons/8/84/Sebastes_alutus.png
+Splitnose,Splitnose,8.43E+09,5.01.E+09,0.00229961,0.0328037,1.683084299,0.070102153,0.303687636,140,461,24,2009,Scorpaenids,https://oregonfishinginfo.com/images_folder/Splitnose%20Rockfish.gif
 Widow rockfish - Pacific Coast,Widow,,,,,0.963,0.07,0.070157159,NA,NA,,2009,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/vermilion-rockfish.png?mw=500&mh=300&bc=ffffff
 Yelloweye rockfish - Pacific Coast,Yelloweye,,,,,0.507,0.414,0.22282957,NA,NA,,2009,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/yelloweye-rockfish.png?mw=500&mh=300&bc=ffffff
 Pacific hake - Pacific Coast,P. Hake,,,,,0.743,0.903,0.517,NA,NA,21,2010,Other,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/hake/pacific-hake.png?mw=500&mh=300&bc=ffffff
@@ -58,7 +58,7 @@ Spiny_dogfish,Dogfish,NA,NA,NA,NA,1.578999996,0.381999999,,,,21,2011,Other,https
 Dover,Dover,393507,117467,0.0168477,0.127581,3.349936578,0.13205493,0.383178224,10952,28582,22,2011,Flatfishes,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/flounder-halibut-plaice-sole-sanddab/dover-sole.png?mw=500&mh=300&bc=ffffff
 Pacific hake - Pacific Coast,P. Hake,,,,,3.152,0.621,0.492384716,165717,336560,21,2011,Other,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/hake/pacific-hake.png?mw=500&mh=300&bc=ffffff
 Petrale,Petrale,,,,,0.718,0.747,0.340239913,936,2751,22,2011,Flatfishes,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/flounder-halibut-plaice-sole-sanddab/petrale-sole.png?mw=500&mh=300&bc=ffffff
-POP,POP,12532.1,26223.9,0.00578563,0.032214,0.477888491,0.179599863,0.135549872,159,1173,24,2011,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/mussel/farmed-mussels.png?mw=500&mh=300&bc=ffffff
+POP,POP,12532.1,26223.9,0.00578563,0.032214,0.477888491,0.179599863,0.135549872,159,1173,24,2011,Scorpaenids,https://upload.wikimedia.org/wikipedia/commons/8/84/Sebastes_alutus.png
 Sablefish,Sablefish,,,,,0.837,1.04,0.7782332,7215,9271,21,2011,Other,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/sablefish/sablefish.png?w=600&amp;mh=350&amp;bc=ffffff
 Widow,Widow,,,,,1.277,0.05,0.024938734,173,6937,21,2011,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/vermilion-rockfish.png?mw=500&mh=300&bc=ffffff
 Yelloweye,Yelloweye,2.19E+08,4.11E+08,0.00609913,0.0220375,0.53355081,0.276761429,0.25,8,32,24,2011,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/yelloweye-rockfish.png?mw=500&mh=300&bc=ffffff
@@ -70,13 +70,13 @@ Cowcod,Cowcod,524,620,NA,NA,0.84516129,0.088355981,0.088355981,NA,NA,24,2013,Sco
 Darkblotched,Darkblotched,,,,,0.903551221,0.211174762,0.211174762,NA,NA,24,2013,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/halfbanded-rockfish.png?mw=500&mh=300&bc=ffffff
 English,English,26152,7337.3,0.00804999,0.432239,3.564253881,0.018623933,0.021133108,311,9745,22,2013,Flatfishes,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/flounder-halibut-plaice-sole-sanddab/dover-sole.png?w=600&amp;mh=350&amp;bc=ffffff
 Pacific hake - Pacific Coast,P. Hake,,,,,1.806823642,0.863836821,0.863836821,NA,NA,21,2013,Other,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/hake/pacific-hake.png?mw=500&mh=300&bc=ffffff
-LST,LST,29435.7,15653.6,0.0134199,0.0603518,1.880442837,0.222361222,0.266886924,NA,NA,24,2013,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/mussel/farmed-mussels.png?mw=500&mh=300&bc=ffffff
-LST,LST,,,,,1.880442837,0.266886924,0.266886924,NA,NA,24,2013,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/mussel/farmed-mussels.png?mw=500&mh=300&bc=ffffff
+LST,LST,29435.7,15653.6,0.0134199,0.0603518,1.880442837,0.222361222,0.266886924,NA,NA,24,2013,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/longspine-thornyhead-rockfish.png?mw=500&mh=300&bc=ffffff
+LST,LST,,,,,1.880442837,0.266886924,0.266886924,NA,NA,24,2013,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/longspine-thornyhead-rockfish.png?mw=500&mh=300&bc=ffffff
 Petrale,Petrale,,,,,0.892092019,0.8684392,0.8684392,NA,NA,22,2013,Flatfishes,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/flounder-halibut-plaice-sole-sanddab/petrale-sole.png?mw=500&mh=300&bc=ffffff
 Rex,Rex,6474.15,2040.37,0.0395474,0.402049,3.173027441,0.098364627,0.186595714,NA,NA,22,2013,Flatfishes,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/flounder-halibut-plaice-sole-sanddab/english-sole.png?mw=500&mh=300&bc=ffffff
 Rougheye,Rougheye,5104.71,4315.08,0.0229109,0.026793,1.182993131,0.855107677,0.98,NA,NA,24,2013,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/yelloweye-rockfish.png?mw=500&mh=300&bc=ffffff
 Sharpchin,Sharpchin,14425.8,6483.04,0.000626551,0.055296,2.225159802,0.011330856,NA,NA,NA,24,2013,Scorpaenids,https://oregonfishinginfo.com/images_folder/Sharpchin%20Rockfish.gif
-SST,SST,140753,75906.1,0.00373019,0.0152922,1.8543042,0.243927623,0.393977947,NA,NA,24,2013,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/mussel/farmed-mussels.png?mw=500&mh=300&bc=ffffff
+SST,SST,140753,75906.1,0.00373019,0.0152922,1.8543042,0.243927623,0.393977947,NA,NA,24,2013,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/longspine-thornyhead-rockfish.png?mw=500&mh=300&bc=ffffff
 Ytail_N,Yellowtail,84448.7,40844.8,0.0108754,0.0816423,2.067550827,0.133207908,0.343266745,NA,NA,24,2013,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/yellowtail-rockfish.png?mw=500&mh=300&bc=ffffff
 Black_CA,Black_CA,353.216,424.609,0.0705773,0.0637095,0.831861783,1.10779868,NA,NA,NA,24,2015,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/black-rockfish.png?mw=500&mh=300&bc=ffffff
 Black_OR,Black_OR,838.216,553.819,0.0911241,0.116731,1.51351976,0.780633251,NA,NA,NA,24,2015,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/black-rockfish.png?mw=500&mh=300&bc=ffffff
@@ -104,7 +104,7 @@ Darkblotched,Darkblotched,1418720000,1417720000,NA,NA,1.000705358,0.280000001,NA
 Lingcod_N,Lingcod_N,21975.7,15189.6,NA,NA,1.446759625,0.25,0.093186995,450,4829,21,2017,Other,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/lingcod/lingcod.png?w=600&amp;mh=350&amp;bc=ffffff
 Lingcod_S,Lingcod_S,6741.96,8184.68,NA,NA,0.823729211,0.597000003,,,,21,2017,Other,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/lingcod/lingcod.png?w=600&amp;mh=350&amp;bc=ffffff
 Pacific hake - Pacific Coast,P. Hake,,,NA,NA,2.23,0.688000023,NA,NA,NA,21,2017,Other,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/hake/pacific-hake.png?mw=500&mh=300&bc=ffffff
-POP,POP,5280.38,2755.67,0.000545118,0.0332907,1.916187352,0.016374483,0.026000001,159,1173,24,2017,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/mussel/farmed-mussels.png?mw=500&mh=300&bc=ffffff
+POP,POP,5280.38,2755.67,0.000545118,0.0332907,1.916187352,0.016374483,0.026000001,159,1173,24,2017,Scorpaenids,https://upload.wikimedia.org/wikipedia/commons/8/84/Sebastes_alutus.png
 Yelloweye,Yelloweye,6.46E+02,9.11E+02,NA,NA,0.709205179,0.187999994,0.187999994,8,32,24,2017,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/yelloweye-rockfish.png?mw=500&mh=300&bc=ffffff
 Ytail N,Yellowtail,11.2782,5.99859,,,1.880141833,0.294,0.294,NA,NA,24,2017,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/yellowtail-rockfish.png?mw=500&mh=300&bc=ffffff
 Big_skate,Big_skate,1999.35,1009.82,0.00796233,0.0705301,1.97990731,0.112892652,,,,21,2019,Other,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/skate/big-skate.png?mw=500&mh=300&bc=ffffff
@@ -128,13 +128,13 @@ Greenstrp,Greenstriped,5.53E+09,2.84E+09,0.000386307,0.0442455,1.95E+00,0.008730
 Lingcod_N,Lingcod_N,23582.7,15189.6,,,1.552555696,0.11687,0.093186995,450,4829,21,2019,Other,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/lingcod/lingcod.png?w=600&amp;mh=350&amp;bc=ffffff
 Lingcod_S,Lingcod_S,6821.63,8103.96,,0.132178,0.841765014,0.354673,,,,21,2019,Other,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/lingcod/lingcod.png?w=600&amp;mh=350&amp;bc=ffffff
 Longnose,Longnose,6922.72,4900.96,0.0155222,0.038771,1.412523261,0.400355936,0.424288773,1387,3269,21,2019,Other,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/skate/skate.png?mw=500&mh=300&bc=ffffff
-LST,LST,"28,389","15,654",0.006,0.06,1.81357643,0.1,0.266886924,NA,NA,24,2019,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/mussel/farmed-mussels.png?mw=500&mh=300&bc=ffffff
+LST,LST,"28,389","15,654",0.006,0.06,1.81357643,0.1,0.266886924,NA,NA,24,2019,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/longspine-thornyhead-rockfish.png?mw=500&mh=300&bc=ffffff
 Pacific hake - Pacific Coast,P. Hake,1.65E+03,6.60E+02,0.116,0.183,2.498484848,0.633879781,NA,NA,NA,21,2019,Other,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/hake/pacific-hake.png?mw=500&mh=300&bc=ffffff
 Petrale,Petrale,13077.7,8351.48,0.119058,0.172524,1.565914066,0.690095291,NA,NA,NA,22,2019,Flatfishes,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/flounder-halibut-plaice-sole-sanddab/petrale-sole.png?mw=500&mh=300&bc=ffffff
 Rougheye,Rougheye,5876.2,4315.08,0.0269363,0.026793,1.3617824,1.005348412,0.98,NA,NA,24,2019,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/yelloweye-rockfish.png?mw=500&mh=300&bc=ffffff
 Sablefish,Sablefish,57443.9,59091.6,0.0352093,0.0487953,0.972116172,0.721571545,NA,NA,NA,21,2019,Other,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/sablefish/sablefish.png?w=600&amp;mh=350&amp;bc=ffffff
 SpinyDog,SpinyD,43623.9,28289.5,0.0100064,0.015971,1.542052705,0.626535596,,,,21,2019,Other,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/shark/spiny-dogfish.png?mw=500&mh=300&bc=ffffff
-Splitnose,Splitnose,1.23E+10,4.12.E+09,0.0305296,0.0328037,2.993297971,0.930675503,0.303687636,140,461,24,2019,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/black-rockfish.png?mw=500&mh=300&bc=ffffff
-SST,SST,139049,75906.1,0.00350428,0.0152922,1.831855411,0.229154732,0.393977947,NA,NA,24,2019,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/mussel/farmed-mussels.png?mw=500&mh=300&bc=ffffff
+Splitnose,Splitnose,1.23E+10,4.12.E+09,0.0305296,0.0328037,2.993297971,0.930675503,0.303687636,140,461,24,2019,Scorpaenids,https://oregonfishinginfo.com/images_folder/Splitnose%20Rockfish.gif
+SST,SST,139049,75906.1,0.00350428,0.0152922,1.831855411,0.229154732,0.393977947,NA,NA,24,2019,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/longspine-thornyhead-rockfish.png?mw=500&mh=300&bc=ffffff
 Widow,Widow,80909.5,35198,0.0579224,0.0835998,2.298695949,0.692853332,NA,NA,NA,24,2019,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/vermilion-rockfish.png?mw=500&mh=300&bc=ffffff
 Yelloweye,Yelloweye,7.03E+02,9.11E+02,0.00559722,0.0218466,0.771351471,0.256205542,0.187999994,8,32,24,2019,Scorpaenids,https://www.seafoodwatch.org/-/m/sfw/images/recommendations/fish/rockfish/yelloweye-rockfish.png?mw=500&mh=300&bc=ffffff
