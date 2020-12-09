@@ -1,21 +1,22 @@
 library(shiny)
 library(shinyWidgets)
+library(shinycssloaders)
 library(shinythemes)
 library(plotly)
 
 quad.plot.WC <-
 data.frame(read.csv(paste0(getwd(), "/Fisheries_Updated_File.csv")))
-
+  
 fluidPage(
   theme = shinytheme("sandstone"),
 
   navbarPage("Fisheries Shiny App"),
+    
+  tabsetPanel( type = "tabs", tabPanel("Plot", plotOutput(outputId = "distPlot") %>% withSpinner(color="#0dc5c1"),
 
-  tabsetPanel( type = "tabs", tabPanel("Plot", plotOutput(outputId = "distPlot"),
+    fluidPage( style = 'padding-left:0px; padding-right:0px; padding-top:0px; padding-bottom:0px',
 
-    fluidPage( style = 'padding-left:35px; padding-right:0px; padding-top:0px; padding-bottom:0px',
-
-      column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+      column( width = 1, offset = 0, style = 'padding-left:35px; padding-right:0px; padding-top:25px; padding-bottom:0px',
 
         dropdown(
           style = "default",
@@ -122,7 +123,7 @@ fluidPage(
           awesomeCheckboxGroup(
             inputId = "checkGroup2",
             label = "Year",
-            choices = list( "1999", "2000", "2001", "2005", "2007", "2009", "2010", "2011", "2013", "2015", "2017", "2019" ),
+            choices = unique(quad.plot.WC$Assessment_Year),
             selected = NULL
           ),
 
@@ -188,7 +189,7 @@ fluidPage(
         ),
       ),
 
-      column( width = 5, offset = 0, style = 'padding-left:80px; padding-right:0px; padding-top:37px; padding-bottom:0px',
+      column( width = 1, offset = 0, style = 'padding-left:80px; padding-right:0px; padding-top:37px; padding-bottom:0px',
 
         prettyCheckbox(
           inputId = "YearSpecies1",
@@ -199,13 +200,27 @@ fluidPage(
           bigger = TRUE,
 
         )
+      ),
+      
+      column( width = 2, offset = 0, style = 'padding-left:180px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+      textInput(inputId = "userInput", label = "Position of Vline", value = "0.5, .62")
+      ),
+      
+      column( width = 2, offset = 0, style = 'padding-left:7.5px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+              textInput(inputId = "userInput2", label = "Color of vline", value = " red, orange ")
+      ),
+      
+      column( width = 3, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+              textInput(inputId = "userInput3", label = "Label of vline", value = "Flatfish, Scorpaenids and Other ")
+              
+     #fileInput(inputId = "fileInput2", label = "file input", multiple = FALSE, accept = NULL, width = NULL, buttonLabel = "Browse...", placeholder = "Default file selected")
       )
-
+      
     )
 
   ),
 
-  tabPanel("Animation", plotlyOutput(outputId = "distPlot2"),
+  tabPanel("Animation", plotlyOutput(outputId = "distPlot2") %>% withSpinner(color="#0dc5c1"),
 
   fluidPage( style = 'padding-left:35px; padding-right:0px; padding-top:0px; padding-bottom:0px',
 
@@ -303,41 +318,6 @@ fluidPage(
       )
     ),
 
-
-    column( width = 1, offset = 0, style = 'padding-left:15px; padding-right:0px; padding-top:25px; padding-bottom:0px',
-
-      dropdown(
-        switchInput(
-          inputId = "Switch3",
-          onLabel = "All",
-          offLabel = "None"
-        ),
-
-        awesomeCheckboxGroup(
-          inputId = "checkGroup3",
-          label = "Year",
-          choices = list( "1999", "2000", "2001", "2005", "2007", "2009", "2010", "2011", "2013", "2015", "2017", "2019" ),
-          selected = NULL
-        ),
-
-        style = "default",
-        size = "normal",
-        icon = NULL,
-        label = "Year",
-        tooltip = FALSE,
-        right = FALSE,
-        up = FALSE,
-        width = NULL,
-        animate = animateOptions(
-          enter = "fadeInDown",
-          exit = "fadeOutUp",
-          duration = 0.25
-        ),
-        inputId = NULL
-      ),
-    ),
-
-
     column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:0px; padding-bottom:0px',
 
       pickerInput(
@@ -348,7 +328,7 @@ fluidPage(
     ),
 
     column( width = 1, offset = 0, style = 'padding-left:60px; padding-right:0px; padding-top:25px; padding-bottom:0px',
-    
+
       dropdown(
         awesomeCheckboxGroup(
           inputId = "graphOptions",

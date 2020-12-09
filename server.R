@@ -15,21 +15,38 @@ library(transformr)
 library(dplyr)
 library(ggimage)
 library(png)
+library(shinycssloaders)
 library(grid)
+    
+    quad.plot.WC <- data.frame(read.csv(paste0(getwd(), "/Fisheries_Updated_File.csv")))
+    
+    quad.plot.WCAnimation <- data.frame(read.csv(paste0(getwd(), "/Animation_Excel_File.csv")))
+  
+#quad.plot.WCAnimation23 <- reactive({
+#function(input, output) {
 
-quad.plot.WC <- data.frame(read.csv(paste0(getwd(), "/Fisheries_Updated_File.csv")))
+#quad.plot.WCAnimation <- data.frame(read.csv(fileInput2$datapath))
 
-quad.plot.WCAnimation <- data.frame(read.csv(paste0(getwd(), "/Animation_Excel_File.csv")))
+#inFile <- input$fileInput2
+
+#if (is.null(inFile)){
+#  quad.plot.WC <- data.frame(read.csv(paste0(getwd(), "/Fisheries_Updated_File.csv")))
+#}
+#else{
+#  quad.plot.WC <- data.frame(read.csv(fileInput2$datapath))
+#}
+
+#}
 
 function(input, output, session) {
+  
   observe({
     if (is.null(input$Flatfishes1) == FALSE) {
       updateAwesomeCheckbox(
         session = session,
         inputId = "Flatfishes2",
-        value = list("Arrowtooth", "Dover", "English", "Petrale", "Rex", "StarryF"
+        value = list("Arrowtooth", "Dover", "English", "Petrale", "Rex", "StarryF"),
         )
-      )
     }
 
     else if (is.null(input$Flatfishes1) == TRUE) {
@@ -140,23 +157,6 @@ function(input, output, session) {
 
                 })
 
-                observe({
-                  if (input$Switch3 == TRUE) {
-                    updateAwesomeCheckbox(
-                      session = session,
-                      inputId = "checkGroup3",
-                      value = list( "1999", "2000", "2001", "2005", "2007", "2009", "2010", "2011", "2013", "2015", "2017", "2019" )
-                    )
-                  }
-
-                  else if (input$Switch3 == FALSE) {
-                    updateAwesomeCheckbox(session = session,
-                      inputId = "checkGroup3",
-                      value = list())
-                    }
-
-                  })
-
                   quad.plot.WC2 <- reactive({
                     a <-
                     subset(
@@ -188,15 +188,36 @@ function(input, output, session) {
                     xlim(0, 4) +
                     ylim(0, 1.5) +
                     theme_light() +
-                    theme(legend.title = element_blank()) +
-                    geom_vline(
-                      xintercept = c(0.5, 0.62, 1),
-                      lty = c(1, 1, 2),
-                      col = c("red", "orange", "black"),
-                      lwd = c(1.25, 1.25, 1)
-                    ) +
                     geom_hline(yintercept = 1, lty = 2) +
+                    theme(legend.title = element_blank()) +
                     guides(shape = guide_legend(override.aes = list(size = 4)))
+                      
+                  #g <- g + geom_vline(
+                  #  xintercept = c(0.5, 0.62, 1),
+                  #    lty = c(1, 1, 2),
+                  #    col = c("red", "orange", "black"),
+                  #    lwd = c(1.25, 1.25, 1)
+                  #  ) +
+                  #  geom_hline(yintercept = 1, lty = 2) +
+                  #  geom_text(aes(x=.5, label="\nFlatfish", y=.75), colour="red", angle=90, text=element_text(size=11)) +
+                  #  geom_text(aes(x=.62, label="\nScorpaenids and Other", y=.75), colour="orange", angle=90, text=element_text(size=11))
+                    
+                    g <- g + geom_vline(
+                     xintercept = c(as.numeric(unlist(strsplit(input$userInput, ","))),1),
+                        #lty = c(1, 1, 2),
+                        col = c(unlist(strsplit(input$userInput2, ",")), "black"),
+                        #c(unlist(strsplit(input$userInput2, ",")))
+                      
+                        #input$userInput2
+                        #lwd = c(1.25, 1.25, 1)
+                      )
+                      
+                      #geom_text(aes(x=.5, label="\nFlatfish", y=.75), colour="red", angle=90, text=element_text(size=11)) +
+                      #geom_text(aes(x=.62, label="\nScorpaenids and Other", y=.75), colour="orange", angle=90, text=element_text(size=11))
+                    
+                    #g <- g + geom_text(aes(x= c(as.numeric(unlist(strsplit(input$userInput, ",")))+.01), label= c((unlist(strsplit(input$userInput3, ",")))), y=.75), color = c(unlist(strsplit(input$userInput2, ","))), angle= 90, text=element_text(size=11))
+                      #geom_text(aes(x=.62, label="\nScorpaenids and Other", y=.75), colour="orange", angle=90, text=element_text(size=11))
+                    
 
                     if (input$Id073 == "F/Fmsy") {
 
@@ -230,7 +251,7 @@ function(input, output, session) {
 
                     if (all(c("Year Labels") %in% input$ImageOptions) && all(c("Species labels") %in% input$ImageOptions)) {
                       g <-
-                      g + aes(label = Abb2) + geom_text_repel(show.legend = FALSE, aes(label = paste("(",Abb2,",",Assessment_Year,")"), color = Spp_type))
+                      g + aes(label = Abb2) + geom_text_repel(show.legend = FALSE, aes(label = paste(Abb2, ";", Assessment_Year), color = Spp_type))
                     }
 
                     else if (all(c("Species labels") %in% input$ImageOptions)) {
@@ -260,10 +281,12 @@ function(input, output, session) {
 
                     if (input$Id074 == "F/Fmsy") {
                       Var = ~F.Fmsy
+                      var4 = ~paste(Abb2,";", Assessment_Year2)
                     }
 
                     else if (input$Id074 == "TM_ABC") {
                       Var = ~TM_ABC
+                      var4 = ~paste(Abb2,",", Assessment_Year3)
                     }
 
                     if (all(c("Legend") %in% input$graphOptions)){
@@ -279,18 +302,18 @@ function(input, output, session) {
                     #quad.plot.WCAnimation %>%
                     plot_ly(
                       #quad.plot.WCAnimation,
-                      subset(quad.plot.WCAnimation, Abb2 %in% c(input$Flatfishes4, input$Scorpaenids4, input$Other4) & Assessment_Year  %in% input$checkGroup3),
+                      subset(quad.plot.WCAnimation, Abb2 %in% c(input$Flatfishes4, input$Scorpaenids4, input$Other4)),
                       x = ~B.Bmsy,
                       y = Var,
                       #size = ~pop,
                       color = ~Abb2,
+                      text = var4,
                       frame = ~Assessment_Year,
 
                       marker = list(
                         size = 10,
                         line = list(color = 'black', width = 2)),
-                        hoverinfo = "text",
-                        text = ~Abb2,
+                        #hoverinfo = "text",
                         type = 'scatter',
                         mode = 'markers',
                         showlegend = Var2,
@@ -340,6 +363,10 @@ function(input, output, session) {
                           tickmode = "linear"
                         )
                       )
+                      
+                      p <- p %>% add_annotations(x = .51, y = .75, text = "Flatfish", font = list(color = "red"), showarrow = F, textangle = 270)
+                      
+                      p <- p %>% add_annotations(x = .63, y = .75, text = "Scorpaenids and Other", font = list(color = "orange"), showarrow = F, textangle = 270)
 
                       vline1 <- function(x = 0, color = "orange") {
                         list(
