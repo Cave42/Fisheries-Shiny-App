@@ -17,29 +17,14 @@ library(ggimage)
 library(png)
 library(shinycssloaders)
 library(grid)
+library(jpeg)
     
     quad.plot.WC <- data.frame(read.csv(paste0(getwd(), "/Fisheries_Updated_File.csv")))
     
     quad.plot.WCAnimation <- data.frame(read.csv(paste0(getwd(), "/Animation_Excel_File.csv")))
-  
-#quad.plot.WCAnimation23 <- reactive({
-#function(input, output) {
-
-#quad.plot.WCAnimation <- data.frame(read.csv(fileInput2$datapath))
-
-#inFile <- input$fileInput2
-
-#if (is.null(inFile)){
-#  quad.plot.WC <- data.frame(read.csv(paste0(getwd(), "/Fisheries_Updated_File.csv")))
-#}
-#else{
-#  quad.plot.WC <- data.frame(read.csv(fileInput2$datapath))
-#}
-
-#}
 
 function(input, output, session) {
-  
+
   observe({
     if (is.null(input$Flatfishes1) == FALSE) {
       updateAwesomeCheckbox(
@@ -181,7 +166,6 @@ function(input, output, session) {
 
                   })
 
-
                   output$distPlot <- renderPlot({
 
                     g <- ggplot(quad.plot.WC2()) +
@@ -197,25 +181,50 @@ function(input, output, session) {
                   #    lty = c(1, 1, 2),
                   #    col = c("red", "orange", "black"),
                   #    lwd = c(1.25, 1.25, 1)
-                  #  ) +
+                  #  ) 
                   #  geom_hline(yintercept = 1, lty = 2) +
                   #  geom_text(aes(x=.5, label="\nFlatfish", y=.75), colour="red", angle=90, text=element_text(size=11)) +
                   #  geom_text(aes(x=.62, label="\nScorpaenids and Other", y=.75), colour="orange", angle=90, text=element_text(size=11))
-                    
+
+                     vlineVariables <- as.list(strsplit(input$userInput, ",")[[1]])
+                     vlineColors <- as.list(strsplit(input$userInput2, ",")[[1]])
+                     vlineNames <- as.list(strsplit(input$userInput3, ",")[[1]])
+        
                     g <- g + geom_vline(
                      xintercept = c(as.numeric(unlist(strsplit(input$userInput, ","))),1),
                         #lty = c(1, 1, 2),
                         col = c(unlist(strsplit(input$userInput2, ",")), "black"),
                         #c(unlist(strsplit(input$userInput2, ",")))
                       
-                        #input$userInput2
+                        #input$userInput
                         #lwd = c(1.25, 1.25, 1)
-                      )
+                      ) +
                       
-                      #geom_text(aes(x=.5, label="\nFlatfish", y=.75), colour="red", angle=90, text=element_text(size=11)) +
-                      #geom_text(aes(x=.62, label="\nScorpaenids and Other", y=.75), colour="orange", angle=90, text=element_text(size=11))
+                      #for (i in 1:2) {
+                          
+                      #g <- g + geom_text(aes(x= as.numeric(vlineVariables[[i]]), y= .75), label= paste("test",i)) 
+
+                      #}
+                      #print(as.numeric(vlineVariables[[i]]))
+                        
+                        #, colour="red", angle=90, text=element_text(size=11))                 
                     
-                    #g <- g + geom_text(aes(x= c(as.numeric(unlist(strsplit(input$userInput, ",")))+.01), label= c((unlist(strsplit(input$userInput3, ",")))), y=.75), color = c(unlist(strsplit(input$userInput2, ","))), angle= 90, text=element_text(size=11))
+                    
+                      geom_text(aes(x= as.numeric(vlineVariables[[1]]), label=vlineNames[[1]], y=.75), colour=vlineColors[[1]], angle=90, text=element_text(size=11)) +
+                      geom_text(aes(x= as.numeric(vlineVariables[[2]]), label=vlineNames[[2]], y=.75), colour=vlineColors[[2]], angle=90, text=element_text(size=11))+
+                      if(vlineVariables[[3]] != "$"){
+                      geom_text(aes(x= as.numeric(vlineVariables[[3]]), label=vlineNames[[3]], y=.75), colour=vlineColors[[3]], angle=90, text=element_text(size=11))
+                      }
+                    
+                      if(vlineVariables[[4]] != "$"){
+                      g <- g + geom_text(aes(x= as.numeric(vlineVariables[[4]]), label=vlineNames[[4]], y=.75), colour=vlineColors[[4]], angle=90, text=element_text(size=11))
+                      }
+                    
+                    if(vlineVariables[[5]] != "$"){
+                      g <- g + geom_text(aes(x= as.numeric(vlineVariables[[5]]), label=vlineNames[[5]], y=.75), colour=vlineColors[[5]], angle=90, text=element_text(size=11))
+                    }
+                      
+                    #geom_text(aes(inherit.aes = FALSE, x= c(as.numeric(unlist(strsplit(input$userInput, ",")))+.01), label= c((unlist(strsplit(input$userInput3, ",")))), y=.75), color = c(unlist(strsplit(input$userInput2, ","))), angle= 90, text=element_text(size=11))
                       #geom_text(aes(x=.62, label="\nScorpaenids and Other", y=.75), colour="orange", angle=90, text=element_text(size=11))
                     
 
@@ -246,7 +255,19 @@ function(input, output, session) {
                     }
 
                     else{
-                      g <- g + geom_point(aes(color = Spp_type, shape = Spp_type))
+
+                        if(input$pointSize == "S"){
+                          g <- g + geom_point(aes(color = Spp_type, shape = Spp_type), size = .1)
+                        }
+                      
+                      if(input$pointSize == "M"){
+                        g <- g + geom_point(aes(color = Spp_type, shape = Spp_type), size = 3)
+                      }
+                        
+                        if(input$pointSize == "L"){
+                          g <- g + geom_point(aes(color = Spp_type, shape = Spp_type), size = 5)
+                        }
+                        
                     }
 
                     if (all(c("Year Labels") %in% input$ImageOptions) && all(c("Species labels") %in% input$ImageOptions)) {
@@ -263,7 +284,7 @@ function(input, output, session) {
                       g <-
                       g + aes(label = Abb2) + geom_text_repel(show.legend = FALSE, aes(label = Assessment_Year, color = Spp_type))
                     }
-
+  
                     if (input$YearSpecies1 == 1) {
                       g <-
                       g + geom_path(aes(
@@ -272,9 +293,17 @@ function(input, output, session) {
                         color = Spp_type
                       ))
                     }
-
+                    
+                    if(input$squarePlot == 1){
+                      g <- g + coord_fixed(ratio = 2.5)
+                    }
+                    
+                    if(input$DownloadPlot == 1){
+                      ggsave(filename="myPlot.png", plot=g)
+                    }
+                    
                     g
-
+                    
                   })
 
                   output$distPlot2 <- renderPlotly({
@@ -294,10 +323,19 @@ function(input, output, session) {
                       Var2 = T
 
                     }
-
+                    
                     else {Var2 = F}
-
-
+                    
+                    if(input$pointSize2 == "S"){
+                     pointSze =5
+                    }
+                    else if(input$pointSize2 == "M"){
+                      pointSze =10
+                    }
+                    else if(input$pointSize2 == "L"){
+                      pointSze =15
+                    }
+                    
                     p <-
                     #quad.plot.WCAnimation %>%
                     plot_ly(
@@ -311,7 +349,7 @@ function(input, output, session) {
                       frame = ~Assessment_Year,
 
                       marker = list(
-                        size = 10,
+                        size = pointSze,
                         line = list(color = 'black', width = 2)),
                         #hoverinfo = "text",
                         type = 'scatter',
@@ -364,6 +402,18 @@ function(input, output, session) {
                         )
                       )
                       
+                      m <- list(
+                        l = 50,
+                        r = 50,
+                        b = 100,
+                        t = 100,
+                        pad = 4
+                      )
+                      
+                      if (input$squarePlot2 == T){
+                      p <- p %>% layout(autosize = F, width = 400, height = 400)
+                      }
+                      
                       p <- p %>% add_annotations(x = .51, y = .75, text = "Flatfish", font = list(color = "red"), showarrow = F, textangle = 270)
                       
                       p <- p %>% add_annotations(x = .63, y = .75, text = "Scorpaenids and Other", font = list(color = "orange"), showarrow = F, textangle = 270)
@@ -372,7 +422,7 @@ function(input, output, session) {
                         list(
                           type = "line",
                           y0 = 0,
-                          y1 = 10,
+                          y1 = 1,
                           yref = "paper",
                           x0 = .62,
                           x1 = .62,
@@ -384,7 +434,7 @@ function(input, output, session) {
                         list(
                           type = "line",
                           y0 = 0,
-                          y1 = 10,
+                          y1 = 1,
                           yref = "paper",
                           x0 = .5,
                           x1 = .5,
@@ -396,7 +446,7 @@ function(input, output, session) {
                         list(
                           type = "line",
                           y0 = 0,
-                          y1 = 10,
+                          y1 = 1,
                           yref = "paper",
                           x0 = 1,
                           x1 = 1,
@@ -408,12 +458,29 @@ function(input, output, session) {
                         list(
                           type = "line",
                           x0 = 0,
-                          x1 = 10,
+                          x1 = 1,
                           xref = "paper",
                           y0 = 1,
                           y1 = 1,
                           line = list(color = color)
                         )
+                        
+                      #  g <- g + geom_vline(
+                          #xintercept = c(as.numeric(unlist(strsplit(input$userInput, ","))),1),
+                          #lty = c(1, 1, 2),
+                         # col = c(unlist(strsplit(input$userInput2, ",")), "black"),
+                          #c(unlist(strsplit(input$userInput2, ",")))
+                          
+                          #input$userInput2
+                          #lwd = c(1.25, 1.25, 1)
+                        #) 
+                          
+                          #geom_text(aes(x=.5, label="\nFlatfish", y=.75), colour="red", angle=90, text=element_text(size=11)) +
+                          #geom_text(aes(x=.62, label="\nScorpaenids and Other", y=.75), colour="orange", angle=90, text=element_text(size=11))
+                          
+                          #geom_text(aes(x= c(as.numeric(unlist(strsplit(input$userInput, ",")))+.01), label= c((unlist(strsplit(input$userInput3, ",")))), y=.75), color = c(unlist(strsplit(input$userInput2, ","))), angle= 90, text=element_text(size=11))
+                          #geom_text(aes(x=.62, label="\nScorpaenids and Other", y=.75), colour="orange", angle=90, text=element_text(size=11))
+                          
                       }
 
                       p <- p %>%
@@ -422,7 +489,9 @@ function(input, output, session) {
                       p <- p %>%
                       animation_opts(1000, redraw = FALSE)
                       # easing = "linear",
-
+                      
+                      htmlwidgets::saveWidget(p, "index.html")
+                      
                       p
                     })
                   }

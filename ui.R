@@ -4,8 +4,7 @@ library(shinycssloaders)
 library(shinythemes)
 library(plotly)
 
-quad.plot.WC <-
-data.frame(read.csv(paste0(getwd(), "/Fisheries_Updated_File.csv")))
+quad.plot.WC <- data.frame(read.csv(paste0(getwd(), "/Fisheries_Updated_File.csv")))
   
 fluidPage(
   theme = shinytheme("sandstone"),
@@ -144,13 +143,21 @@ fluidPage(
         ),
       ),
 
+      column( width = 2, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+              
+              pickerInput(
+                inputId = "Id0731",
+                label = "X Axis",
+                choices = c("B/BMSY proxy (Btarget)", "B/BMSY", "B/SPR target", "B/B0")
+              ),
+      ),
 
       column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:0px; padding-bottom:0px',
 
         pickerInput(
           inputId = "Id073",
           label = "Y Axis",
-          choices = c("F/Fmsy", "TM_ABC"),
+          choices = c("F/Fmsy", "TM_ABC", "TM/OFL", "F/FMSY proxy", "(1-SPR)/(1-SPRtarget)"),
         ),
       ),
 
@@ -169,6 +176,13 @@ fluidPage(
             label = "Image Size",
             choices = c("S",
             "M", "L"),
+            selected = "M"
+          ),
+          
+          radioGroupButtons(
+            inputId = "pointSize",
+            label = "Point Size",
+            choices = c("S","M", "L"),
             selected = "M"
           ),
 
@@ -202,20 +216,45 @@ fluidPage(
         )
       ),
       
-      column( width = 2, offset = 0, style = 'padding-left:180px; padding-right:0px; padding-top:0px; padding-bottom:0px',
-      textInput(inputId = "userInput", label = "Position of Vline", value = "0.5, .62")
+      column( width = 2, offset = 0, style = 'padding-left:120px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+      textInput(inputId = "userInput", label = "Position of Vline", value = "0.5, .62, $, $, $")
       ),
       
-      column( width = 2, offset = 0, style = 'padding-left:7.5px; padding-right:0px; padding-top:0px; padding-bottom:0px',
-              textInput(inputId = "userInput2", label = "Color of vline", value = " red, orange ")
+      column( width = 2, offset = 0, style = 'padding-left:25px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+              textInput(inputId = "userInput2", label = "Color of vline", value = " red, orange, blue, blue, blue ")
       ),
       
-      column( width = 3, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:0px; padding-bottom:0px',
-              textInput(inputId = "userInput3", label = "Label of vline", value = "Flatfish, Scorpaenids and Other ")
+      column( width = 3, offset = 0, style = 'padding-left:35px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+              textInput(inputId = "userInput3", label = "Label of vline", value = "Flatfish, Scorpaenids and Other, $, $, $ ")
               
-     #fileInput(inputId = "fileInput2", label = "file input", multiple = FALSE, accept = NULL, width = NULL, buttonLabel = "Browse...", placeholder = "Default file selected")
-      )
+      ),
       
+     column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:37px; padding-bottom:0px',
+             
+             prettyCheckbox(
+               inputId = "DownloadPlot",
+               label = "Download Plot",
+               value = FALSE,
+               shape = c("curve"),
+               animation = "smooth",
+               bigger = TRUE,
+               
+             )
+     ),
+     
+     column( width = 1, offset = 0, style = 'padding-left:20px; padding-right:0px; padding-top:37px; padding-bottom:0px',
+             
+             prettyCheckbox(
+               inputId = "squarePlot",
+               label = "Square Plot",
+               value = FALSE,
+               shape = c("curve"),
+               animation = "smooth",
+               bigger = TRUE,
+               
+             )
+     ),
+     
     )
 
   ),
@@ -323,13 +362,35 @@ fluidPage(
       pickerInput(
         inputId = "Id074",
         label = "Y Axis",
-        choices = c("F/Fmsy", "TM_ABC"),
+        choices = c("F/Fmsy", "TM_ABC", "TM/OFL", "F/FMSY proxy", "(1-SPR)/(1-SPRtarget)"),
       ),
     ),
+    
+    column( width = 2, offset = 0, style = 'padding-left:50px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+            
+            pickerInput(
+              inputId = "Id0731",
+              label = "x Axis",
+              choices = c("B/BMSY proxy (Btarget)", "B/BMSY", "B/SPR target", "B/B0")
+            ),
+    ),
+    
+    column( width = 2, offset = 0, style = 'padding-left:20px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+            textInput(inputId = "userInput12", label = "Position of Vline", value = "0.5, .62")
+    ),
+    
+    column( width = 2, offset = 0, style = 'padding-left:20px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+            textInput(inputId = "userInput22", label = "Color of vline", value = " red, orange ")
+    ),
+    
+    column( width = 2, offset = 0, style = 'padding-left:20; padding-right:0px; padding-top:0px; padding-bottom:0px',
+            textInput(inputId = "userInput33", label = "Label of vline", value = "Flatfish, Scorpaenids and Other ")),
+            
 
-    column( width = 1, offset = 0, style = 'padding-left:60px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+    column( width = 1, offset = 0, style = 'padding-left:20px; padding-right:0px; padding-top:25px; padding-bottom:0px',
 
       dropdown(
+        
         awesomeCheckboxGroup(
           inputId = "graphOptions",
           label = "Graph Options",
@@ -350,6 +411,27 @@ fluidPage(
           exit = "fadeOutUp",
           duration = 0.25
         ),
-        inputId = NULL
+        inputId = NULL,
+        
+        radioGroupButtons(
+          inputId = "pointSize2",
+          label = "Point Size",
+          choices = c("S","M", "L"),
+          selected = "M"
+        ),
+        
+        ),
+        
       ),
+      
+      column( width = 1, offset = 0, style = 'padding-left:11px; padding-right:0px; padding-top:35px; padding-bottom:0px',
+              prettyCheckbox(
+                inputId = "squarePlot2",
+                label = "Square Plot",
+                value = FALSE,
+                shape = c("curve"),
+                animation = "smooth",
+                bigger = TRUE,
+              ),
+      
     ) ) ) ) )
