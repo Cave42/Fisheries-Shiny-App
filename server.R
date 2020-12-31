@@ -173,314 +173,386 @@ function(input, output, session) {
                 })
 
                 output$distPlot <- renderPlot({
+                  
+                  
+                  #remove rows that are not F/Fmsy
+                  quad.plot.WC3 <- filter(quad.plot.WC2(), !is.na(F/Fmsy) | F/Fmsy != "")
+                  #Most recent values only
+                  quad.plot.WC4 <- filter(quad.plot.WC3 %>% group_by(Abb2) %>% top_n(1, Assessment_Year))
 
-                  #quad.plot.WC3 <- quad.plot.WC2() %>% group_by(Abb2) %>%
-                  #filter(Assessment_Year == min(Assessment_Year), max(Assessment_Year) == Assessment_Year)
-                  #mutate(color = (min(Assessment_Year) == Assessment_Year | max(Assessment_Year) == Assessment_Year))
-                  #mutate(color = (min(value) == value | max(value) == value))
-                  #filter(
-                  # MaxMassByGender = max(Assessment_Year, na.rm = T),
-                  #  MinMassByGender = min(Assessment_Year, na.rm = T)
-                  #) %>%
-                  #  arrange(Abb2)
+                  #Bottom only
+                  quad.plot.WC5 <- filter(quad.plot.WC3 %>% group_by(Abb2) %>% top_n(-1, Assessment_Year))
 
-                  #quad.plot.WC3 <- quad.plot.WC2() %>% group_by(Abb2) %>%
-                  #subset(min(Assessment_Year) == Assessment_Year | max(Assessment_Year) == Assessment_Year)
-                  #filter(Assessment_Year == min(Assessment_Year))``
+                  #Combine min and max
+                  quad.plot.WC6 <- rbind( quad.plot.WC5,  quad.plot.WC4)
 
-                  #quad.plot.WC3 <-
-                  #subset(
-                  #  quad.plot.WC2(),
-                  #  Abb2 %in% (min(Assessment_Year)))
+                  #Remove duplicates
+                  quad.plot.WC6 <- quad.plot.WC6[!duplicated(quad.plot.WC6), ]
+                  
+                  
+                  if(input$pointDelete == "Latest Only"){
+                    dataEdit <- quad.plot.WC4
+                  }
+                  
+                  if(input$pointDelete == "First and Last"){
+                    dataEdit <- quad.plot.WC6
+                  }
+                  
+                  if(input$pointDelete == "All"){
+                    dataEdit <- quad.plot.WC2()
+                  }
 
-                    #g <- ggplot(quad.plot.WC3) +
-                    g <- ggplot(quad.plot.WC2()) +
-                    xlim(0, 4) +
-                    ylim(0, 1.5) +
-                    theme_light() +
-                    geom_hline(yintercept = 1, lty = 2) +
-                    theme(legend.title = element_blank()) +
-                    guides(shape = guide_legend(override.aes = list(size = 4)))
+                  g <- ggplot(dataEdit) +
+                  #g <- ggplot(quad.plot.WC2()) +
+                  xlim(0, 4) +
+                  ylim(0, 1.5) +
+                  theme_light() +
+                  geom_hline(yintercept = 1, lty = 2) +
+                  theme(legend.title = element_blank()) +
+                  guides(shape = guide_legend(override.aes = list(size = 4)))
 
-                    #g <- g + geom_vline(
-                    #  xintercept = c(0.5, 0.62, 1),
-                    #    lty = c(1, 1, 2),
-                    #    col = c("red", "orange", "black"),
-                    #    lwd = c(1.25, 1.25, 1)
-                    #  )
-                    #  geom_hline(yintercept = 1, lty = 2) +
-                    #  geom_text(aes(x=.5, label="\nFlatfish", y=.75), colour="red", angle=90, text=element_text(size=11)) +
-                    #  geom_text(aes(x=.62, label="\nScorpaenids and Other", y=.75), colour="orange", angle=90, text=element_text(size=11))
+                  vlineVariables <- as.list(strsplit(input$userInput, ",")[[1]])
+                  vlineColors <- as.list(strsplit(input$userInput2, ",")[[1]])
+                  vlineNames <- as.list(strsplit(input$userInput3, ",")[[1]])
 
-                    vlineVariables <- as.list(strsplit(input$userInput, ",")[[1]])
-                    vlineColors <- as.list(strsplit(input$userInput2, ",")[[1]])
-                    vlineNames <- as.list(strsplit(input$userInput3, ",")[[1]])
+                  g <- g + geom_vline(
+                    xintercept = c(as.numeric(unlist(strsplit(input$userInput, ","))),1),
+                    #lty = c(1, 1, 2),
+                    col = c(unlist(strsplit(input$userInput2, ",")), "black"),
+                    #c(unlist(strsplit(input$userInput2, ",")))
 
-                    g <- g + geom_vline(
-                      xintercept = c(as.numeric(unlist(strsplit(input$userInput, ","))),1),
-                      #lty = c(1, 1, 2),
-                      col = c(unlist(strsplit(input$userInput2, ",")), "black"),
-                      #c(unlist(strsplit(input$userInput2, ",")))
+                    #input$userInput
+                    #lwd = c(1.25, 1.25, 1)
+                  ) +
 
-                      #input$userInput
-                      #lwd = c(1.25, 1.25, 1)
-                    ) +
+                  geom_text(aes(x= as.numeric(vlineVariables[[1]])+.01, label=vlineNames[[1]], y=.75), colour=vlineColors[[1]], angle=90, text=element_text(size=11)) +
+                  geom_text(aes(x= as.numeric(vlineVariables[[2]])+.01, label=vlineNames[[2]], y=.75), colour=vlineColors[[2]], angle=90, text=element_text(size=11))+
+                  if(vlineVariables[[3]] != " "){
+                    geom_text(aes(x= as.numeric(vlineVariables[[3]])+.01, label=vlineNames[[3]], y=.75), colour=vlineColors[[3]], angle=90, text=element_text(size=11))
+                  }
 
-                    #for (i in 1:2) {
+                  if(vlineVariables[[4]] != " "){
+                    g <- g + geom_text(aes(x= as.numeric(vlineVariables[[4]])+.01, label=vlineNames[[4]], y=.75), colour=vlineColors[[4]], angle=90, text=element_text(size=11))
+                  }
 
-                    #g <- g + geom_text(aes(x= as.numeric(vlineVariables[[i]]), y= .75), label= paste("test",i))
+                  if(vlineVariables[[5]] != " "){
+                    g <- g + geom_text(aes(x= as.numeric(vlineVariables[[5]])+.01, label=vlineNames[[5]], y=.75), colour=vlineColors[[5]], angle=90, text=element_text(size=11))
+                  }
+                  
+                  if (input$Id073 == "F/Fmsy") {
 
-                    #}
-                    #print(as.numeric(vlineVariables[[i]]))
+                    g <- g + aes(B.Bmsy, F.Fmsy) + labs(x = expression(bold("Relative Stock Status")), y = expression(bold("Fishing Intensity (F/Fmsy)")))
+                  }
 
-                    #, colour="red", angle=90, text=element_text(size=11))
+                  else if (input$Id073 == "TM_ABC") {
 
+                    g <- g + aes(B.Bmsy, TM_ABC) + labs(x = expression(bold("Relative Stock Status")), y = expression(bold("Fishing Intensity (TM_ABC)")))
+                  }
 
-                    geom_text(aes(x= as.numeric(vlineVariables[[1]])+.01, label=vlineNames[[1]], y=.75), colour=vlineColors[[1]], angle=90, text=element_text(size=11)) +
-                    geom_text(aes(x= as.numeric(vlineVariables[[2]])+.01, label=vlineNames[[2]], y=.75), colour=vlineColors[[2]], angle=90, text=element_text(size=11))+
-                    if(vlineVariables[[3]] != "$"){
-                      geom_text(aes(x= as.numeric(vlineVariables[[3]])+.01, label=vlineNames[[3]], y=.75), colour=vlineColors[[3]], angle=90, text=element_text(size=11))
+                  if (all(c("Images") %in% input$ImageOptions)) {
+
+                    if(input$imageSize == "S"){
+                      g <- g + geom_image(aes(image = Image), size = .01, asp = 30 / 9) + scale_size_identity()
                     }
 
-                    if(vlineVariables[[4]] != "$"){
-                      g <- g + geom_text(aes(x= as.numeric(vlineVariables[[4]])+.01, label=vlineNames[[4]], y=.75), colour=vlineColors[[4]], angle=90, text=element_text(size=11))
+                    if(input$imageSize == "M"){
+                      g <- g + geom_image(aes(image = Image), size = .02, asp = 30 / 9) + scale_size_identity()
                     }
 
-                    if(vlineVariables[[5]] != "$"){
-                      g <- g + geom_text(aes(x= as.numeric(vlineVariables[[5]])+.01, label=vlineNames[[5]], y=.75), colour=vlineColors[[5]], angle=90, text=element_text(size=11))
+                    if(input$imageSize == "L"){
+                      g <- g + geom_image(aes(image = Image), size = .03, asp = 30 / 9) + scale_size_identity()
                     }
 
-                    #geom_text(aes(inherit.aes = FALSE, x= c(as.numeric(unlist(strsplit(input$userInput, ",")))+.01), label= c((unlist(strsplit(input$userInput3, ",")))), y=.75), color = c(unlist(strsplit(input$userInput2, ","))), angle= 90, text=element_text(size=11))
-                    #geom_text(aes(x=.62, label="\nScorpaenids and Other", y=.75), colour="orange", angle=90, text=element_text(size=11))
+                  }
 
+                  else{
 
-                    if (input$Id073 == "F/Fmsy") {
-
-                      g <- g + aes(B.Bmsy, F.Fmsy) + labs(x = expression(bold("Relative Stock Status")), y = expression(bold("Fishing Intensity (F/Fmsy)")))
+                    if(input$pointSize == "S"){
+                      g <- g + geom_point(aes(color = Spp_type, shape = Spp_type), size = .1)
                     }
 
-                    else if (input$Id073 == "TM_ABC") {
-
-                      g <- g + aes(B.Bmsy, TM_ABC) + labs(x = expression(bold("Relative Stock Status")), y = expression(bold("Fishing Intensity (TM_ABC)")))
+                    if(input$pointSize == "M"){
+                      g <- g + geom_point(aes(color = Spp_type, shape = Spp_type), size = 3)
                     }
 
-                    if (all(c("Images") %in% input$ImageOptions)) {
-
-                      if(input$imageSize == "S"){
-                        g <- g + geom_image(aes(image = Image), size = .01, asp = 30 / 9) + scale_size_identity()
-                      }
-
-                      if(input$imageSize == "M"){
-                        g <- g + geom_image(aes(image = Image), size = .02, asp = 30 / 9) + scale_size_identity()
-                      }
-
-                      if(input$imageSize == "L"){
-                        g <- g + geom_image(aes(image = Image), size = .03, asp = 30 / 9) + scale_size_identity()
-                      }
-
+                    if(input$pointSize == "L"){
+                      g <- g + geom_point(aes(color = Spp_type, shape = Spp_type), size = 5)
                     }
 
-                    else{
+                  }
 
-                      if(input$pointSize == "S"){
-                        g <- g + geom_point(aes(color = Spp_type, shape = Spp_type), size = .1)
-                      }
+                  if (all(c("Year Labels") %in% input$ImageOptions) && all(c("Species labels") %in% input$ImageOptions)) {
+                    g <-
+                    g + aes(label = Abb2) + geom_text_repel(show.legend = FALSE, aes(label = paste(Abb2, ";", Assessment_Year), color = Spp_type))
+                  }
 
-                      if(input$pointSize == "M"){
-                        g <- g + geom_point(aes(color = Spp_type, shape = Spp_type), size = 3)
-                      }
+                  else if (all(c("Species labels") %in% input$ImageOptions)) {
+                    g <-
+                    g + aes(label = Abb2) + geom_text_repel(show.legend = FALSE, aes(label = Abb2, color = Spp_type))
+                  }
 
-                      if(input$pointSize == "L"){
-                        g <- g + geom_point(aes(color = Spp_type, shape = Spp_type), size = 5)
-                      }
+                  else if (all(c("Year Labels") %in% input$ImageOptions)) {
+                    g <-
+                    g + aes(label = Abb2) + geom_text_repel(show.legend = FALSE, aes(label = Assessment_Year, color = Spp_type))
+                  }
 
+                  if (input$YearSpecies1 == 1) {
+                    g <-
+                    g + geom_path(aes(
+                      linetype = Abb2,
+                      group = (Abb2),
+                      color = Spp_type
+                    ))
+                  }
+
+                  if(input$squarePlot == 1){
+                    g <- g + coord_fixed(ratio = 2.5)
+                  }
+
+                  #if(input$DownloadPlot == 1){
+                     #savedPlot <- ggsave(filename="myPlot2.jpeg", plot=g)
+                  #}
+                    
+                  
+
+                    #data$plot <- g
+                  output$downloadData <- downloadHandler(
+                    filename = function() {
+                      "plot.jpeg"
+                    },
+                    content = function(file) {
+                      ggsave(file, g, width = 18, height = 10)
                     }
+                  )
+                  
+                g
+                
+                })
+                
+                output$distPlot2 <- renderPlotly({
 
-                    if (all(c("Year Labels") %in% input$ImageOptions) && all(c("Species labels") %in% input$ImageOptions)) {
-                      g <-
-                      g + aes(label = Abb2) + geom_text_repel(show.legend = FALSE, aes(label = paste(Abb2, ";", Assessment_Year), color = Spp_type))
-                    }
+                  if (input$Id074 == "F/Fmsy") {
+                    Var = ~F.Fmsy
+                    var4 = ~paste(Abb2,";", Assessment_Year2)
+                  }
 
-                    else if (all(c("Species labels") %in% input$ImageOptions)) {
-                      g <-
-                      g + aes(label = Abb2) + geom_text_repel(show.legend = FALSE, aes(label = Abb2, color = Spp_type))
-                    }
+                  else if (input$Id074 == "TM_ABC") {
+                    Var = ~TM_ABC
+                    var4 = ~paste(Abb2,",", Assessment_Year3)
+                  }
 
-                    else if (all(c("Year Labels") %in% input$ImageOptions)) {
-                      g <-
-                      g + aes(label = Abb2) + geom_text_repel(show.legend = FALSE, aes(label = Assessment_Year, color = Spp_type))
-                    }
+                  if (all(c("Legend") %in% input$graphOptions)){
 
-                    if (input$YearSpecies1 == 1) {
-                      g <-
-                      g + geom_path(aes(
-                        linetype = Abb2,
-                        group = (Abb2),
-                        color = Spp_type
-                      ))
-                    }
+                    Var2 = T
 
-                    if(input$squarePlot == 1){
-                      g <- g + coord_fixed(ratio = 2.5)
-                    }
+                  }
 
-                    if(input$DownloadPlot == 1){
-                      ggsave(filename="myPlot.png", plot=g)
-                    }
+                  else {Var2 = F}
 
-                    g
+                  if(input$pointSize2 == "S"){
+                    pointSze =5
+                  }
+                  else if(input$pointSize2 == "M"){
+                    pointSze =10
+                  }
+                  else if(input$pointSize2 == "L"){
+                    pointSze =15
+                  }
 
-                  })
+                  p <-
+                  #quad.plot.WCAnimation %>%
+                  plot_ly(
+                    #quad.plot.WCAnimation,
+                    subset(quad.plot.WCAnimation, Abb2 %in% c(input$Flatfishes4, input$Scorpaenids4, input$Other4)),
+                    x = ~B.Bmsy,
+                    y = Var,
+                    #size = ~pop,
+                    color = ~Abb2,
+                    text = var4,
+                    frame = ~Assessment_Year,
 
-                  output$distPlot2 <- renderPlotly({
+                    marker = list(
+                      size = pointSze,
+                      line = list(color = 'black', width = 2)),
+                      #hoverinfo = "text",
+                      type = 'scatter',
+                      mode = 'markers',
+                      showlegend = Var2,
+                      symbol = ~Spp_type
+                    )
 
                     if (input$Id074 == "F/Fmsy") {
-                      Var = ~F.Fmsy
-                      var4 = ~paste(Abb2,";", Assessment_Year2)
+                      p <-
+                      p %>% layout(
+                        xaxis = list(title = "Relative Stock Status"),
+                        yaxis = list(title = "Fishing Intensity (F/Fmsy)")
+                      )
+
                     }
 
                     else if (input$Id074 == "TM_ABC") {
-                      Var = ~TM_ABC
-                      var4 = ~paste(Abb2,",", Assessment_Year3)
-                    }
-
-                    if (all(c("Legend") %in% input$graphOptions)){
-
-                      Var2 = T
-
-                    }
-
-                    else {Var2 = F}
-
-                    if(input$pointSize2 == "S"){
-                      pointSze =5
-                    }
-                    else if(input$pointSize2 == "M"){
-                      pointSze =10
-                    }
-                    else if(input$pointSize2 == "L"){
-                      pointSze =15
-                    }
-
-                    p <-
-                    #quad.plot.WCAnimation %>%
-                    plot_ly(
-                      #quad.plot.WCAnimation,
-                      subset(quad.plot.WCAnimation, Abb2 %in% c(input$Flatfishes4, input$Scorpaenids4, input$Other4)),
-                      x = ~B.Bmsy,
-                      y = Var,
-                      #size = ~pop,
-                      color = ~Abb2,
-                      text = var4,
-                      frame = ~Assessment_Year,
-
-                      marker = list(
-                        size = pointSze,
-                        line = list(color = 'black', width = 2)),
-                        #hoverinfo = "text",
-                        type = 'scatter',
-                        mode = 'markers',
-                        showlegend = Var2,
-                        symbol = ~Spp_type
+                      p <-
+                      p %>% layout(
+                        xaxis = list(title = "Relative Stock Status"),
+                        yaxis = list(title = "Fishing Intensity (TM_ABC)")
                       )
 
-                      if (input$Id074 == "F/Fmsy") {
-                        p <-
-                        p %>% layout(
-                          xaxis = list(title = "Relative Stock Status"),
-                          yaxis = list(title = "Fishing Intensity (F/Fmsy)")
-                        )
+                    }
 
-                      }
+                    if (all(c("Species labels") %in% input$graphOptions)){
 
-                      else if (input$Id074 == "TM_ABC") {
-                        p <-
-                        p %>% layout(
-                          xaxis = list(title = "Relative Stock Status"),
-                          yaxis = list(title = "Fishing Intensity (TM_ABC)")
-                        )
+                      p <- p %>% add_text(textposition = "top right", color = ~Abb2)
 
-                      }
-
-                      if (all(c("Species labels") %in% input$graphOptions)){
-
-                        p <- p %>% add_text(textposition = "top right", color = ~Abb2)
-
-                      }
+                    }
 
 
 
-                      p <- p %>% layout(xaxis = list(range = c(0, 4)),
-                      yaxis = list(range = c(0, 1.5)))
+                    p <- p %>% layout(xaxis = list(range = c(0, 4)),
+                    yaxis = list(range = c(0, 1.5)))
 
-                      p <- p %>%
-                      layout(
-                        xaxis = list(
-                          dtick = 1,
-                          tick0 = 0,
-                          tickmode = "linear"
-                        ),
+                    p <- p %>%
+                    layout(
+                      xaxis = list(
+                        dtick = 1,
+                        tick0 = 0,
+                        tickmode = "linear"
+                      ),
 
-                        yaxis = list(
-                          dtick = 0.5,
-                          tick0 = 0,
-                          tickmode = "linear"
-                        )
+                      yaxis = list(
+                        dtick = 0.5,
+                        tick0 = 0,
+                        tickmode = "linear"
                       )
+                    )
 
-                      m <- list(
-                        l = 50,
-                        r = 50,
-                        b = 100,
-                        t = 100,
-                        pad = 4
+                    m <- list(
+                      l = 50,
+                      r = 50,
+                      b = 100,
+                      t = 100,
+                      pad = 4
+                    )
+
+                    if (input$squarePlot2 == T){
+                      p <- p %>% layout(autosize = F, width = 600, height = 600)
+                    }
+
+                    vlineVariables <- as.list(strsplit(input$userInput12, ",")[[1]])
+                    vlineColors <- as.list(strsplit(input$userInput22, ",")[[1]])
+                    vlineNames <- as.list(strsplit(input$userInput33, ",")[[1]])
+                    
+                    if (input$squarePlot2 == F){
+                      movement <- .01
+                    }
+                    if (input$squarePlot2 == T){
+                      movement <- .05
+                    }
+                    
+                    p <- p %>% add_annotations(x = as.numeric(vlineVariables[[1]])+movement, y = .75, text = vlineNames[[1]], font = list(color = vlineColors[[1]]), showarrow = F, textangle = 270)
+                    
+                    p <- p %>% add_annotations(x = as.numeric(vlineVariables[[2]])+movement, y = .75, text = vlineNames[[2]], font = list(color = vlineColors[[2]]), showarrow = F, textangle = 270)
+                    
+                    vline1 <- function(x = 0, color = vlineColors[[1]]) {
+                      list(
+                        type = "line",
+                        y0 = 0,
+                        y1 = 1,
+                        yref = "paper",
+                        x0 = vlineVariables[[1]],
+                        x1 = vlineVariables[[1]],
+                        line = list(color = color)
                       )
+                    }
 
-                      if (input$squarePlot2 == T){
-                        p <- p %>% layout(autosize = F, width = 400, height = 400)
-                      }
-
-                      p <- p %>% add_annotations(x = .51, y = .75, text = "Flatfish", font = list(color = "red"), showarrow = F, textangle = 270)
-
-                      p <- p %>% add_annotations(x = .63, y = .75, text = "Scorpaenids and Other", font = list(color = "orange"), showarrow = F, textangle = 270)
-
-                      vline1 <- function(x = 0, color = "orange") {
-                        list(
-                          type = "line",
-                          y0 = 0,
-                          y1 = 1,
-                          yref = "paper",
-                          x0 = .62,
-                          x1 = .62,
-                          line = list(color = color)
-                        )
-                      }
-
-                      vline2 <- function(x = 0, color = "red") {
-                        list(
-                          type = "line",
-                          y0 = 0,
-                          y1 = 1,
-                          yref = "paper",
-                          x0 = .5,
-                          x1 = .5,
-                          line = list(color = color)
-                        )
-                      }
-
-                      vline <- function(x = 0, color = "black") {
-                        list(
-                          type = "line",
-                          y0 = 0,
-                          y1 = 1,
-                          yref = "paper",
-                          x0 = 1,
-                          x1 = 1,
-                          line = list(color = color)
-                        )
-                      }
-
-                      hline <- function(y = 0, color = "black") {
+                    vline2 <- function(x = 0, color = vlineColors[[2]]) {
+                      list(
+                        type = "line",
+                        y0 = 0,
+                        y1 = 1,
+                        yref = "paper",
+                        x0 = vlineVariables[[2]],
+                        x1 = vlineVariables[[2]],
+                        line = list(color = color)
+                      )
+                    }
+                    
+                    if(vlineVariables[[3]] != " "){
+                    p <- p %>% add_annotations(x = as.numeric(vlineVariables[[3]])+.01, y = .75, text = vlineNames[[3]], font = list(color = vlineColors[[3]]), showarrow = F, textangle = 270)
+                    
+                    vline3 <- function(x = 0, color = vlineColors[[3]]) {
+                      list(
+                        type = "line",
+                        y0 = 0,
+                        y1 = 1,
+                        yref = "paper",
+                        x0 = vlineVariables[[3]],
+                        x1 = vlineVariables[[3]],
+                        line = list(color = color)
+                      )
+                    
+                    }
+                    }
+                    
+                    else{vline3 <- function(y = 0, color = "black") {
+                      list(
+                        type = "line",
+                        x0 = 0,
+                        x1 = 1,
+                        xref = "paper",
+                        y0 = 1,
+                        y1 = 1,
+                        line = list(color = color)
+                      )}
+                    }
+                    
+                    if(vlineVariables[[4]] != " "){
+                    
+                    p <- p %>% add_annotations(x = as.numeric(vlineVariables[[4]])+.01, y = .75, text = vlineNames[[4]], font = list(color = vlineColors[[4]]), showarrow = F, textangle = 270)
+                    
+                    vline4 <- function(x = 0, color = vlineColors[[4]]) {
+                      list(
+                        type = "line",
+                        y0 = 0,
+                        y1 = 1,
+                        yref = "paper",
+                        x0 = vlineVariables[[4]],
+                        x1 = vlineVariables[[4]],
+                        line = list(color = color)
+                      )
+                    
+                    }
+                    }
+                    
+                    else{vline4 <- function(y = 0, color = "black") {
+                      list(
+                        type = "line",
+                        x0 = 0,
+                        x1 = 1,
+                        xref = "paper",
+                        y0 = 1,
+                        y1 = 1,
+                        line = list(color = color)
+                      )}
+                    }
+                    
+                    if(vlineVariables[[5]] != " "){
+                    p <- p %>% add_annotations(x = as.numeric(vlineVariables[[5]])+.01, y = .75, text = vlineNames[[5]], font = list(color = vlineColors[[5]]), showarrow = F, textangle = 270)
+                    
+                    vline5 <- function(x = 0, color = vlineColors[[5]]) {
+                      list(
+                        type = "line",
+                        y0 = 0,
+                        y1 = 1,
+                        yref = "paper",
+                        x0 = vlineVariables[[5]],
+                        x1 = vlineVariables[[5]],
+                        line = list(color = color)
+                      )
+                    }
+                    }
+                    
+                    else{
+                      vline5 <- function(y = 0, color = "black") {
                         list(
                           type = "line",
                           x0 = 0,
@@ -490,34 +562,54 @@ function(input, output, session) {
                           y1 = 1,
                           line = list(color = color)
                         )
-
-                        #  g <- g + geom_vline(
-                        #xintercept = c(as.numeric(unlist(strsplit(input$userInput, ","))),1),
-                        #lty = c(1, 1, 2),
-                        # col = c(unlist(strsplit(input$userInput2, ",")), "black"),
-                        #c(unlist(strsplit(input$userInput2, ",")))
-
-                        #input$userInput2
-                        #lwd = c(1.25, 1.25, 1)
-                        #)
-
-                        #geom_text(aes(x=.5, label="\nFlatfish", y=.75), colour="red", angle=90, text=element_text(size=11)) +
-                        #geom_text(aes(x=.62, label="\nScorpaenids and Other", y=.75), colour="orange", angle=90, text=element_text(size=11))
-
-                        #geom_text(aes(x= c(as.numeric(unlist(strsplit(input$userInput, ",")))+.01), label= c((unlist(strsplit(input$userInput3, ",")))), y=.75), color = c(unlist(strsplit(input$userInput2, ","))), angle= 90, text=element_text(size=11))
-                        #geom_text(aes(x=.62, label="\nScorpaenids and Other", y=.75), colour="orange", angle=90, text=element_text(size=11))
-
                       }
+                    }
 
+                    vline <- function(x = 0, color = "black") {
+                      list(
+                        type = "line",
+                        y0 = 0,
+                        y1 = 1,
+                        yref = "paper",
+                        x0 = 1,
+                        x1 = 1,
+                        line = list(color = color)
+                      )
+                    }
+
+                    hline <- function(y = 0, color = "black") {
+                      list(
+                        type = "line",
+                        x0 = 0,
+                        x1 = 1,
+                        xref = "paper",
+                        y0 = 1,
+                        y1 = 1,
+                        line = list(color = color)
+                      )
+                      
+                    }
+                    
                       p <- p %>%
-                      layout(shapes = list(vline1(4), vline2(4), vline(4), hline(5)))
+                    layout(shapes = list(vline1(4), vline2(4),vline3(4), vline4(4), vline5, vline(4), hline(5)))
 
-                      p <- p %>%
-                      animation_opts(1000, redraw = FALSE)
-                      # easing = "linear",
+                    p <- p %>%
+                    animation_opts(1000, redraw = FALSE)
+                    # easing = "linear",
 
-                      htmlwidgets::saveWidget(p, "index.html")
+                    #if(input$DownloadPlot2 == 1){
+                      
+                    #}
+                    
+                    output$downloadData2 <- downloadHandler(
+                      filename = function() {
+                        "plotly.html"
+                      },
+                      content = function(file) {
+                        htmlwidgets::saveWidget(p, file)
+                      }
+                    )
 
-                      p
-                    })
-                  }
+                    p
+                  })
+                }

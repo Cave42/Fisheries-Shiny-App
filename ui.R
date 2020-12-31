@@ -83,7 +83,7 @@ fluidPage(
 
 ),
 
-column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:150px; padding-top:0px; padding-bottom:0px',
+column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:0px; padding-bottom:0px',
 
 checkboxGroupButtons(
   inputId = "Other1",
@@ -110,7 +110,7 @@ awesomeCheckboxGroup(
 ),
 
 
-column( width = 1, offset = 0, style = 'padding-left:15px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+column( width = 1, offset = 0, style = 'padding-left:25px; padding-right:0px; padding-top:25px; padding-bottom:0px',
 
 dropdown(
   switchInput(
@@ -152,7 +152,7 @@ pickerInput(
 ),
 ),
 
-column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+column( width = 1, offset = 0, style = 'padding-left:35px; padding-right:0px; padding-top:0px; padding-bottom:0px',
 
 pickerInput(
   inputId = "Id073",
@@ -161,7 +161,59 @@ pickerInput(
 ),
 ),
 
-column( width = 1, offset = 0, style = 'padding-left:60px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+column( width = 1, offset = 0, style = 'padding-left:50px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+        
+        dropdown(
+          
+                prettyCheckbox(
+                  inputId = "YearSpecies1",
+                  label = "Year Species Linkage",
+                  value = FALSE,
+                  shape = c("curve"),
+                  animation = "smooth",
+                  bigger = TRUE,
+                  
+                ),
+      
+        prettyCheckbox(
+          inputId = "squarePlot",
+          label = "Square Plot",
+          value = FALSE,
+          shape = c("curve"),
+          animation = "smooth",
+          bigger = TRUE,
+          
+        ),
+
+        radioGroupButtons(
+          inputId = "pointDelete",
+          label = "Data Collection Years",
+          choices = c("Latest Only",
+                      "First and Last", "All"),
+          selected = "All"
+        ),
+        
+        
+        
+         
+          style = "default",
+          size = "normal",
+          icon = NULL,
+          label = "Graph Options",
+          tooltip = FALSE,
+          right = FALSE,
+          up = FALSE,
+          width = NULL,
+          animate = animateOptions(
+            enter = "fadeInDown",
+            exit = "fadeOutUp",
+            duration = 0.25
+          ),
+          inputId = NULL
+        ),
+),
+
+column( width = 1, offset = 0, style = 'padding-left:80px; padding-right:0px; padding-top:25px; padding-bottom:0px',
 
 dropdown(
   awesomeCheckboxGroup(
@@ -203,63 +255,59 @@ dropdown(
 ),
 ),
 
-column( width = 1, offset = 0, style = 'padding-left:80px; padding-right:0px; padding-top:37px; padding-bottom:0px',
-
-prettyCheckbox(
-  inputId = "YearSpecies1",
-  label = "Year Species Linkage",
-  value = FALSE,
-  shape = c("curve"),
-  animation = "smooth",
-  bigger = TRUE,
-
-)
+column( width = 3, offset = 0, style = 'padding-left:100px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+        
+        dropdown(
+         
+          #column( width = 2, offset = 0, style = 'padding-left:120px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+                  (textInput(inputId = "userInput", label = "Position", value = "0.5, .62, , , ")
+          ),
+          
+          #column( width = 2, offset = 0, style = 'padding-left:25px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+                  (textInput(inputId = "userInput2", label = "Color", value = " red, orange, blue, blue, blue ")
+          ),
+          
+          #column( width = 3, offset = 0, style = 'padding-left:35px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+                  (textInput(inputId = "userInput3", label = "Label", value = "Flatfish, Scorpaenids and Other, , ,  ")
+                  
+          ),
+          
+          style = "default",
+          size = "normal",
+          icon = NULL,
+          label = "Customize relative biomass limit reference point",
+          tooltip = FALSE,
+          right = FALSE,
+          up = FALSE,
+          width = NULL,
+          animate = animateOptions(
+            enter = "fadeInDown",
+            exit = "fadeOutUp",
+            duration = 0.25
+          ),
+          inputId = NULL
+        ),
 ),
 
-column( width = 2, offset = 0, style = 'padding-left:120px; padding-right:0px; padding-top:0px; padding-bottom:0px',
-textInput(inputId = "userInput", label = "Position of Vline", value = "0.5, .62, $, $, $")
-),
+column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:25px; padding-bottom:0px',
 
-column( width = 2, offset = 0, style = 'padding-left:25px; padding-right:0px; padding-top:0px; padding-bottom:0px',
-textInput(inputId = "userInput2", label = "Color of vline", value = " red, orange, blue, blue, blue ")
-),
+        downloadButton('downloadData', 'Download Plot')
+#prettyCheckbox(
+#  inputId = "DownloadPlot",
+#  label = "Download Plot",
+#  value = FALSE,
+#  shape = c("curve"),
+#  animation = "smooth",
+#  bigger = TRUE,
 
-column( width = 3, offset = 0, style = 'padding-left:35px; padding-right:0px; padding-top:0px; padding-bottom:0px',
-textInput(inputId = "userInput3", label = "Label of vline", value = "Flatfish, Scorpaenids and Other, $, $, $ ")
-
-),
-
-column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:37px; padding-bottom:0px',
-
-prettyCheckbox(
-  inputId = "DownloadPlot",
-  label = "Download Plot",
-  value = FALSE,
-  shape = c("curve"),
-  animation = "smooth",
-  bigger = TRUE,
-
-)
-),
-
-column( width = 1, offset = 0, style = 'padding-left:20px; padding-right:0px; padding-top:37px; padding-bottom:0px',
-
-prettyCheckbox(
-  inputId = "squarePlot",
-  label = "Square Plot",
-  value = FALSE,
-  shape = c("curve"),
-  animation = "smooth",
-  bigger = TRUE,
-
-)
+#)
 ),
 
 )
 
 ),
 
-tabPanel("Animation", plotlyOutput(outputId = "distPlot2") %>% withSpinner(color="#0dc5c1"),
+tabPanel("Animation", div(plotlyOutput(outputId = "distPlot2", height = "100%"), align = "center") %>% withSpinner(color="#0dc5c1"),
 
 fluidPage( style = 'padding-left:35px; padding-right:0px; padding-top:0px; padding-bottom:0px',
 
@@ -375,19 +423,40 @@ pickerInput(
 ),
 ),
 
-column( width = 2, offset = 0, style = 'padding-left:20px; padding-right:0px; padding-top:0px; padding-bottom:0px',
-textInput(inputId = "userInput12", label = "Position of Vline", value = "0.5, .62")
+column( width = 3, offset = 0, style = 'padding-left:50px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+        dropdown(
+          
+          
+          #column( width = 2, offset = 0, style = 'padding-left:120px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+          (textInput(inputId = "userInput12", label = "Position", value = "0.5, .62, , , ")
+          ),
+          
+          #column( width = 2, offset = 0, style = 'padding-left:25px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+          (textInput(inputId = "userInput22", label = "Color", value = " red, orange, blue, blue, blue ")
+          ),
+          
+          #column( width = 3, offset = 0, style = 'padding-left:35px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+          (textInput(inputId = "userInput33", label = "Label", value = "Flatfish, Scorpaenids and Other, , ,  ")
+           
+          ),
+          
+          style = "default",
+          size = "normal",
+          icon = NULL,
+          label = "Customize relative biomass limit reference point",
+          tooltip = FALSE,
+          right = FALSE,
+          up = FALSE,
+          width = NULL,
+          animate = animateOptions(
+            enter = "fadeInDown",
+            exit = "fadeOutUp",
+            duration = 0.25
+          ),
+          inputId = NULL
+        ),
 ),
-
-column( width = 2, offset = 0, style = 'padding-left:20px; padding-right:0px; padding-top:0px; padding-bottom:0px',
-textInput(inputId = "userInput22", label = "Color of vline", value = " red, orange ")
-),
-
-column( width = 2, offset = 0, style = 'padding-left:20; padding-right:0px; padding-top:0px; padding-bottom:0px',
-textInput(inputId = "userInput33", label = "Label of vline", value = "Flatfish, Scorpaenids and Other ")),
-
-
-column( width = 1, offset = 0, style = 'padding-left:20px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:25px; padding-bottom:0px',
 
 dropdown(
 
@@ -424,7 +493,7 @@ dropdown(
 
 ),
 
-column( width = 1, offset = 0, style = 'padding-left:11px; padding-right:0px; padding-top:35px; padding-bottom:0px',
+column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:35px; padding-bottom:0px',
 prettyCheckbox(
   inputId = "squarePlot2",
   label = "Square Plot",
@@ -433,5 +502,21 @@ prettyCheckbox(
   animation = "smooth",
   bigger = TRUE,
 ),
+),
 
-) ) ) ) )
+column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+        
+        downloadButton('downloadData2', 'Download Plot')
+        
+        #prettyCheckbox(
+        #  inputId = "DownloadPlot2",
+         # label = "Download Plot",
+        #  value = FALSE,
+         # shape = c("curve"),
+         # animation = "smooth",
+         # bigger = TRUE,
+          
+       # )
+),
+
+) ) ) ) 
