@@ -110,14 +110,31 @@ awesomeCheckboxGroup(
 ),
 
 
-column( width = 1, offset = 0, style = 'padding-left:25px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+column( width = 1, offset = 0, style = 'padding-left:25px; padding-right:90px; padding-top:25px; padding-bottom:0px',
 
-dropdown(
-  switchInput(
-    inputId = "Switch2",
-    onLabel = "All",
-    offLabel = "None"
+        dropdown(
+          
+  radioGroupButtons(
+    inputId = "pointDelete",
+    label = "Stock Assessment Years",
+    choices = c("Latest",
+                "First & Last", "Custom", "All"),
+    direction = "horizontal",
+    selected = "Custom"
   ),
+  
+  prettyCheckbox(
+    inputId = "YearSpecies1",
+    label = "Year Species Linkage",
+    value = FALSE,
+    shape = c("curve"),
+    animation = "smooth",
+    bigger = TRUE,
+    
+  ),
+ 
+ conditionalPanel(
+   condition = "input.pointDelete == 'Custom'",
 
   awesomeCheckboxGroup(
     inputId = "checkGroup2",
@@ -125,7 +142,9 @@ dropdown(
     choices = unique(quad.plot.WC$Assessment_Year),
     selected = NULL
   ),
-
+  
+ ),
+ 
   style = "default",
   size = "normal",
   icon = NULL,
@@ -152,7 +171,7 @@ pickerInput(
 ),
 ),
 
-column( width = 1, offset = 0, style = 'padding-left:35px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+column( width = 1, offset = 0, style = 'padding-left:35px; padding-right:30px; padding-top:0px; padding-bottom:0px',
 
 pickerInput(
   inputId = "Id073",
@@ -161,66 +180,24 @@ pickerInput(
 ),
 ),
 
-column( width = 1, offset = 0, style = 'padding-left:50px; padding-right:0px; padding-top:25px; padding-bottom:0px',
-        
-        dropdown(
-          
-                prettyCheckbox(
-                  inputId = "YearSpecies1",
-                  label = "Year Species Linkage",
-                  value = FALSE,
-                  shape = c("curve"),
-                  animation = "smooth",
-                  bigger = TRUE,
-                  
-                ),
-      
-        prettyCheckbox(
-          inputId = "squarePlot",
-          label = "Square Plot",
-          value = FALSE,
-          shape = c("curve"),
-          animation = "smooth",
-          bigger = TRUE,
-          
-        ),
-
-        radioGroupButtons(
-          inputId = "pointDelete",
-          label = "Data Collection Years",
-          choices = c("Latest Only",
-                      "First and Last", "All"),
-          selected = "All"
-        ),
-        
-        
-        
-         
-          style = "default",
-          size = "normal",
-          icon = NULL,
-          label = "Graph Options",
-          tooltip = FALSE,
-          right = FALSE,
-          up = FALSE,
-          width = NULL,
-          animate = animateOptions(
-            enter = "fadeInDown",
-            exit = "fadeOutUp",
-            duration = 0.25
-          ),
-          inputId = NULL
-        ),
-),
-
-column( width = 1, offset = 0, style = 'padding-left:80px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:90px; padding-top:25px; padding-bottom:0px',
 
 dropdown(
   awesomeCheckboxGroup(
     inputId = "ImageOptions",
-    label = "Label Options",
+    label = "Plot Options",
     choices = list("Images", "Species labels", "Year Labels"),
     selected = list("Species labels")
+  ),
+  
+  prettyCheckbox(
+    inputId = "squarePlot",
+    label = "Square Plot",
+    value = FALSE,
+    shape = c("curve"),
+    animation = "smooth",
+    bigger = TRUE,
+    
   ),
 
   radioGroupButtons(
@@ -238,10 +215,16 @@ dropdown(
     selected = "M"
   ),
 
+  (textInput(inputId = "userInputX1", label = "X min and max", value = "0, 4")
+  ),
+  
+  (textInput(inputId = "userInputY1", label = "Y min and max", value = "0, 1.5")
+  ),
+  
   style = "default",
   size = "normal",
   icon = NULL,
-  label = "Label Options",
+  label = "Plot Options",
   tooltip = FALSE,
   right = FALSE,
   up = FALSE,
@@ -255,7 +238,7 @@ dropdown(
 ),
 ),
 
-column( width = 3, offset = 0, style = 'padding-left:100px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+column( width = 3, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:25px; padding-bottom:0px',
         
         dropdown(
          
@@ -292,15 +275,7 @@ column( width = 3, offset = 0, style = 'padding-left:100px; padding-right:0px; p
 column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:25px; padding-bottom:0px',
 
         downloadButton('downloadData', 'Download Plot')
-#prettyCheckbox(
-#  inputId = "DownloadPlot",
-#  label = "Download Plot",
-#  value = FALSE,
-#  shape = c("curve"),
-#  animation = "smooth",
-#  bigger = TRUE,
 
-#)
 ),
 
 )
@@ -462,15 +437,30 @@ dropdown(
 
   awesomeCheckboxGroup(
     inputId = "graphOptions",
-    label = "Graph Options",
+    label = "Figure Options",
     choices = list("Species labels", "Legend"),
     selected = list("Species labels")
+  ),
+  
+  prettyCheckbox(
+    inputId = "squarePlot2",
+    label = "Square Plot",
+    value = FALSE,
+    shape = c("curve"),
+    animation = "smooth",
+    bigger = TRUE,
+  ),
+  
+  (textInput(inputId = "userInputX12", label = "X min and max", value = "0, 4")
+  ),
+  
+  (textInput(inputId = "userInputY12", label = "Y min and max", value = "0, 1.5")
   ),
 
   style = "default",
   size = "normal",
   icon = NULL,
-  label = "Label Options",
+  label = "Plot Options",
   tooltip = FALSE,
   right = FALSE,
   up = FALSE,
@@ -494,29 +484,13 @@ dropdown(
 ),
 
 column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:35px; padding-bottom:0px',
-prettyCheckbox(
-  inputId = "squarePlot2",
-  label = "Square Plot",
-  value = FALSE,
-  shape = c("curve"),
-  animation = "smooth",
-  bigger = TRUE,
-),
+
 ),
 
 column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:25px; padding-bottom:0px',
         
         downloadButton('downloadData2', 'Download Plot')
-        
-        #prettyCheckbox(
-        #  inputId = "DownloadPlot2",
-         # label = "Download Plot",
-        #  value = FALSE,
-         # shape = c("curve"),
-         # animation = "smooth",
-         # bigger = TRUE,
-          
-       # )
+
 ),
 
 ) ) ) ) 

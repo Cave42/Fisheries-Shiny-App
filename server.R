@@ -126,7 +126,7 @@ function(input, output, session) {
               })
 
               observe({
-                if (input$Switch2 == TRUE) {
+                if (input$pointDelete == "All") {
                   updateAwesomeCheckbox(
                     session = session,
                     inputId = "checkGroup2",
@@ -134,7 +134,7 @@ function(input, output, session) {
                   )
                 }
 
-                else if (input$Switch2 == FALSE) {
+                else {
                   updateAwesomeCheckbox(session = session,
                     inputId = "checkGroup2",
                     value = list())
@@ -147,13 +147,11 @@ function(input, output, session) {
                   subset(
                     quad.plot.WC,
                     Abb2 %in% c(input$Flatfishes2, input$Scorpaenids2, input$Other2) &
-                    Assessment_Year %in% c(input$checkGroup2)
+                      if(input$pointDelete == "Custom"){
+                      Assessment_Year %in% c(input$checkGroup2)
+                      }
+                    else Assessment_Year
 
-                    # group_by(Assessment_Year) %>%
-                    #  filter(x == min(x))
-
-                    #group_by(variable) %>%
-                    #  mutate(color = (min(value) == value | max(value) == value))
                   )
 
                   return(a)
@@ -190,22 +188,26 @@ function(input, output, session) {
                   quad.plot.WC6 <- quad.plot.WC6[!duplicated(quad.plot.WC6), ]
                   
                   
-                  if(input$pointDelete == "Latest Only"){
+                  if(input$pointDelete == "Latest"){
                     dataEdit <- quad.plot.WC4
                   }
                   
-                  if(input$pointDelete == "First and Last"){
+                  if(input$pointDelete == "First & Last"){
                     dataEdit <- quad.plot.WC6
                   }
                   
-                  if(input$pointDelete == "All"){
+                  if(input$pointDelete == "Custom" | input$pointDelete == "All" ){
                     dataEdit <- quad.plot.WC2()
                   }
+                  
+                  xValues <- as.list(strsplit(input$userInputX1, ",")[[1]])
+                  
+                  yValues <- as.list(strsplit(input$userInputY1, ",")[[1]])
 
                   g <- ggplot(dataEdit) +
                   #g <- ggplot(quad.plot.WC2()) +
-                  xlim(0, 4) +
-                  ylim(0, 1.5) +
+                  xlim(as.numeric(xValues[[1]]), as.numeric(xValues[[2]])) +
+                  ylim(as.numeric(yValues[[1]]), as.numeric(yValues[[2]])) +
                   theme_light() +
                   geom_hline(yintercept = 1, lty = 2) +
                   theme(legend.title = element_blank()) +
@@ -225,18 +227,18 @@ function(input, output, session) {
                     #lwd = c(1.25, 1.25, 1)
                   ) +
 
-                  geom_text(aes(x= as.numeric(vlineVariables[[1]])+.01, label=vlineNames[[1]], y=.75), colour=vlineColors[[1]], angle=90, text=element_text(size=11)) +
-                  geom_text(aes(x= as.numeric(vlineVariables[[2]])+.01, label=vlineNames[[2]], y=.75), colour=vlineColors[[2]], angle=90, text=element_text(size=11))+
+                  geom_text(aes(x= as.numeric(vlineVariables[[1]])+.01, label=vlineNames[[1]], y=(as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2), colour=vlineColors[[1]], angle=90, text=element_text(size=11)) +
+                  geom_text(aes(x= as.numeric(vlineVariables[[2]])+.01, label=vlineNames[[2]], y=(as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2), colour=vlineColors[[2]], angle=90, text=element_text(size=11))+
                   if(vlineVariables[[3]] != " "){
-                    geom_text(aes(x= as.numeric(vlineVariables[[3]])+.01, label=vlineNames[[3]], y=.75), colour=vlineColors[[3]], angle=90, text=element_text(size=11))
+                    geom_text(aes(x= as.numeric(vlineVariables[[3]])+.01, label=vlineNames[[3]], y=(as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2), colour=vlineColors[[3]], angle=90, text=element_text(size=11))
                   }
 
                   if(vlineVariables[[4]] != " "){
-                    g <- g + geom_text(aes(x= as.numeric(vlineVariables[[4]])+.01, label=vlineNames[[4]], y=.75), colour=vlineColors[[4]], angle=90, text=element_text(size=11))
+                    g <- g + geom_text(aes(x= as.numeric(vlineVariables[[4]])+.01, label=vlineNames[[4]], y=(as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2), colour=vlineColors[[4]], angle=90, text=element_text(size=11))
                   }
 
                   if(vlineVariables[[5]] != " "){
-                    g <- g + geom_text(aes(x= as.numeric(vlineVariables[[5]])+.01, label=vlineNames[[5]], y=.75), colour=vlineColors[[5]], angle=90, text=element_text(size=11))
+                    g <- g + geom_text(aes(x= as.numeric(vlineVariables[[5]])+.01, label=vlineNames[[5]], y=(as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2), colour=vlineColors[[5]], angle=90, text=element_text(size=11))
                   }
                   
                   if (input$Id073 == "F/Fmsy") {
@@ -309,16 +311,9 @@ function(input, output, session) {
                     g <- g + coord_fixed(ratio = 2.5)
                   }
 
-                  #if(input$DownloadPlot == 1){
-                     #savedPlot <- ggsave(filename="myPlot2.jpeg", plot=g)
-                  #}
-                    
-                  
-
-                    #data$plot <- g
                   output$downloadData <- downloadHandler(
                     filename = function() {
-                      "plot.jpeg"
+                      "plot.png"
                     },
                     content = function(file) {
                       ggsave(file, g, width = 18, height = 10)
@@ -358,6 +353,10 @@ function(input, output, session) {
                   else if(input$pointSize2 == "L"){
                     pointSze =15
                   }
+                  
+                  xValues <- as.list(strsplit(input$userInputX12, ",")[[1]])
+                  
+                  yValues <- as.list(strsplit(input$userInputY12, ",")[[1]])
 
                   p <-
                   #quad.plot.WCAnimation %>%
@@ -404,11 +403,9 @@ function(input, output, session) {
                       p <- p %>% add_text(textposition = "top right", color = ~Abb2)
 
                     }
-
-
-
-                    p <- p %>% layout(xaxis = list(range = c(0, 4)),
-                    yaxis = list(range = c(0, 1.5)))
+              
+                    p <- p %>% layout(xaxis = list(range = c(as.numeric(xValues[[1]]), as.numeric(xValues[[2]]))),
+                    yaxis = list(range = c(as.numeric(yValues[[1]]), as.numeric(yValues[[2]]))))
 
                     p <- p %>%
                     layout(
@@ -448,9 +445,9 @@ function(input, output, session) {
                       movement <- .05
                     }
                     
-                    p <- p %>% add_annotations(x = as.numeric(vlineVariables[[1]])+movement, y = .75, text = vlineNames[[1]], font = list(color = vlineColors[[1]]), showarrow = F, textangle = 270)
+                    p <- p %>% add_annotations(x = as.numeric(vlineVariables[[1]])+movement, y = (as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2 , text = vlineNames[[1]], font = list(color = vlineColors[[1]]), showarrow = F, textangle = 270)
                     
-                    p <- p %>% add_annotations(x = as.numeric(vlineVariables[[2]])+movement, y = .75, text = vlineNames[[2]], font = list(color = vlineColors[[2]]), showarrow = F, textangle = 270)
+                    p <- p %>% add_annotations(x = as.numeric(vlineVariables[[2]])+movement, y = (as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2, text = vlineNames[[2]], font = list(color = vlineColors[[2]]), showarrow = F, textangle = 270)
                     
                     vline1 <- function(x = 0, color = vlineColors[[1]]) {
                       list(
@@ -477,7 +474,7 @@ function(input, output, session) {
                     }
                     
                     if(vlineVariables[[3]] != " "){
-                    p <- p %>% add_annotations(x = as.numeric(vlineVariables[[3]])+.01, y = .75, text = vlineNames[[3]], font = list(color = vlineColors[[3]]), showarrow = F, textangle = 270)
+                    p <- p %>% add_annotations(x = as.numeric(vlineVariables[[3]])+.01, y = (as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2, text = vlineNames[[3]], font = list(color = vlineColors[[3]]), showarrow = F, textangle = 270)
                     
                     vline3 <- function(x = 0, color = vlineColors[[3]]) {
                       list(
@@ -507,7 +504,7 @@ function(input, output, session) {
                     
                     if(vlineVariables[[4]] != " "){
                     
-                    p <- p %>% add_annotations(x = as.numeric(vlineVariables[[4]])+.01, y = .75, text = vlineNames[[4]], font = list(color = vlineColors[[4]]), showarrow = F, textangle = 270)
+                    p <- p %>% add_annotations(x = as.numeric(vlineVariables[[4]])+.01, y = (as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2, text = vlineNames[[4]], font = list(color = vlineColors[[4]]), showarrow = F, textangle = 270)
                     
                     vline4 <- function(x = 0, color = vlineColors[[4]]) {
                       list(
@@ -536,7 +533,7 @@ function(input, output, session) {
                     }
                     
                     if(vlineVariables[[5]] != " "){
-                    p <- p %>% add_annotations(x = as.numeric(vlineVariables[[5]])+.01, y = .75, text = vlineNames[[5]], font = list(color = vlineColors[[5]]), showarrow = F, textangle = 270)
+                    p <- p %>% add_annotations(x = as.numeric(vlineVariables[[5]])+.01, y = (as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2, text = vlineNames[[5]], font = list(color = vlineColors[[5]]), showarrow = F, textangle = 270)
                     
                     vline5 <- function(x = 0, color = vlineColors[[5]]) {
                       list(
