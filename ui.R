@@ -162,25 +162,99 @@ column( width = 1, offset = 0, style = 'padding-left:25px; padding-right:90px; p
 ),
 ),
 
-column( width = 2, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:250px; padding-top:25px; padding-bottom:0px',
 
+        dropdown(
+          
 pickerInput(
   inputId = "Id0731",
-  label = "X Axis",
+  #label = "Relative biomass options",
   choices = c("B/BMSY proxy (Btarget)", "B/BMSY", "B/SPR target", "B/B0")
 ),
+
+(textInput(inputId = "userInputX1", label = "X min and max", value = "0, 4")
 ),
 
-column( width = 1, offset = 0, style = 'padding-left:35px; padding-right:30px; padding-top:0px; padding-bottom:0px',
+#dropdown(
+  
+  #column( width = 2, offset = 0, style = 'padding-left:120px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+  (textInput(inputId = "userInput", label = "Position", value = "0.5, .62, , , ")
+  ),
+  
+  #column( width = 2, offset = 0, style = 'padding-left:25px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+  (textInput(inputId = "userInput2", label = "Color", value = " red, orange, blue, blue, blue ")
+  ),
+  
+  #column( width = 3, offset = 0, style = 'padding-left:35px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+  (textInput(inputId = "userInput3", label = "Label", value = "Flatfish, Scorpaenids and Other, , ,  ")
+   
+  ),
+  
+  #style = "default",
+  #size = "normal",
+  #icon = NULL,
+  #label = "Customize relative biomass limit reference point",
+  # tooltip = FALSE,
+  # right = FALSE,
+  # up = FALSE,
+  # width = NULL,
+  # animate = animateOptions(
+  #   enter = "fadeInDown",
+  #   exit = "fadeOutUp",
+  #   duration = 0.25
+  # ),
+  #inputId = NULL
+#),
 
+style = "default",
+size = "normal",
+icon = NULL,
+label = "Relative biomass options",
+tooltip = FALSE,
+right = FALSE,
+up = FALSE,
+width = NULL,
+animate = animateOptions(
+  enter = "fadeInDown",
+  exit = "fadeOutUp",
+  duration = 0.25
+),
+#inputId = NULL
+)
+),
+
+column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:250px; padding-top:25px; padding-bottom:0px',
+
+        dropdown(
+          
 pickerInput(
   inputId = "Id073",
-  label = "Y Axis",
+  #label = "Fishing intensity options",
   choices = c("F/Fmsy", "TM_ABC", "TM/OFL", "F/FMSY proxy", "(1-SPR)/(1-SPRtarget)"),
 ),
+
+(textInput(inputId = "userInputY1", label = "Y min and max", value = "0, 1.5")
 ),
 
-column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:90px; padding-top:25px; padding-bottom:0px',
+style = "default",
+size = "normal",
+icon = NULL,
+label = "Fishing intensity options",
+tooltip = FALSE,
+right = FALSE,
+up = FALSE,
+width = NULL,
+animate = animateOptions(
+  enter = "fadeInDown",
+  exit = "fadeOutUp",
+  duration = 0.25
+),
+
+)
+
+),
+
+column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:165px; padding-top:25px; padding-bottom:0px',
 
 dropdown(
   awesomeCheckboxGroup(
@@ -215,11 +289,9 @@ dropdown(
     selected = "M"
   ),
 
-  (textInput(inputId = "userInputX1", label = "X min and max", value = "0, 4")
-  ),
   
-  (textInput(inputId = "userInputY1", label = "Y min and max", value = "0, 1.5")
-  ),
+  
+  
   
   style = "default",
   size = "normal",
@@ -238,39 +310,10 @@ dropdown(
 ),
 ),
 
-column( width = 3, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+#column( width = 3, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:25px; padding-bottom:0px',
         
-        dropdown(
-         
-          #column( width = 2, offset = 0, style = 'padding-left:120px; padding-right:0px; padding-top:0px; padding-bottom:0px',
-                  (textInput(inputId = "userInput", label = "Position", value = "0.5, .62, , , ")
-          ),
-          
-          #column( width = 2, offset = 0, style = 'padding-left:25px; padding-right:0px; padding-top:0px; padding-bottom:0px',
-                  (textInput(inputId = "userInput2", label = "Color", value = " red, orange, blue, blue, blue ")
-          ),
-          
-          #column( width = 3, offset = 0, style = 'padding-left:35px; padding-right:0px; padding-top:0px; padding-bottom:0px',
-                  (textInput(inputId = "userInput3", label = "Label", value = "Flatfish, Scorpaenids and Other, , ,  ")
-                  
-          ),
-          
-          style = "default",
-          size = "normal",
-          icon = NULL,
-          label = "Customize relative biomass limit reference point",
-          tooltip = FALSE,
-          right = FALSE,
-          up = FALSE,
-          width = NULL,
-          animate = animateOptions(
-            enter = "fadeInDown",
-            exit = "fadeOutUp",
-            duration = 0.25
-          ),
-          inputId = NULL
-        ),
-),
+        
+#),
 
 column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:25px; padding-bottom:0px',
 
@@ -286,7 +329,7 @@ tabPanel("Animation", div(plotlyOutput(outputId = "distPlot2", height = "100%"),
 
 fluidPage( style = 'padding-left:35px; padding-right:0px; padding-top:0px; padding-bottom:0px',
 
-column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+column( width = 1, offset = 0, style = 'padding-left:27px; padding-right:0px; padding-top:25px; padding-bottom:0px',
 
 dropdown(
   style = "default",
@@ -380,58 +423,82 @@ awesomeCheckboxGroup(
 )
 ),
 
-column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:180px; padding-top:25px; padding-bottom:0px',
 
-pickerInput(
-  inputId = "Id074",
-  label = "Y Axis",
-  choices = c("F/Fmsy", "TM_ABC", "TM/OFL", "F/FMSY proxy", "(1-SPR)/(1-SPRtarget)"),
-),
-),
-
-column( width = 2, offset = 0, style = 'padding-left:50px; padding-right:0px; padding-top:0px; padding-bottom:0px',
-
-pickerInput(
-  inputId = "Id0731",
-  label = "x Axis",
-  choices = c("B/BMSY proxy (Btarget)", "B/BMSY", "B/SPR target", "B/B0")
-),
-),
-
-column( width = 3, offset = 0, style = 'padding-left:50px; padding-right:0px; padding-top:25px; padding-bottom:0px',
         dropdown(
           
-          
-          #column( width = 2, offset = 0, style = 'padding-left:120px; padding-right:0px; padding-top:0px; padding-bottom:0px',
-          (textInput(inputId = "userInput12", label = "Position", value = "0.5, .62, , , ")
-          ),
-          
-          #column( width = 2, offset = 0, style = 'padding-left:25px; padding-right:0px; padding-top:0px; padding-bottom:0px',
-          (textInput(inputId = "userInput22", label = "Color", value = " red, orange, blue, blue, blue ")
-          ),
-          
-          #column( width = 3, offset = 0, style = 'padding-left:35px; padding-right:0px; padding-top:0px; padding-bottom:0px',
-          (textInput(inputId = "userInput33", label = "Label", value = "Flatfish, Scorpaenids and Other, , ,  ")
-           
-          ),
-          
-          style = "default",
-          size = "normal",
-          icon = NULL,
-          label = "Customize relative biomass limit reference point",
-          tooltip = FALSE,
-          right = FALSE,
-          up = FALSE,
-          width = NULL,
-          animate = animateOptions(
-            enter = "fadeInDown",
-            exit = "fadeOutUp",
-            duration = 0.25
-          ),
-          inputId = NULL
-        ),
+pickerInput(
+  inputId = "Id074",
+  #label = "Fishing intensity options",
+  choices = c("F/Fmsy", "TM_ABC", "TM/OFL", "F/FMSY proxy", "(1-SPR)/(1-SPRtarget)"),
 ),
-column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+
+(textInput(inputId = "userInputY12", label = "Y min and max", value = "0, 1.5")
+),
+
+style = "default",
+size = "normal",
+icon = NULL,
+label = "Fishing intensity options",
+tooltip = FALSE,
+right = FALSE,
+up = FALSE,
+width = NULL,
+animate = animateOptions(
+  enter = "fadeInDown",
+  exit = "fadeOutUp",
+  duration = 0.25
+),
+inputId = NULL
+        ),
+
+),
+
+column( width = 2, offset = 0, style = 'padding-left:50px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+
+        dropdown(
+          
+pickerInput(
+  inputId = "Id0731",
+  #label = "Relative biomass options",
+  choices = c("B/BMSY proxy (Btarget)", "B/BMSY", "B/SPR target", "B/B0")
+),
+
+(textInput(inputId = "userInputX12", label = "X min and max", value = "0, 4")
+),
+
+(textInput(inputId = "userInput12", label = "Position", value = "0.5, .62, , , ")
+),
+
+#column( width = 2, offset = 0, style = 'padding-left:25px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+(textInput(inputId = "userInput22", label = "Color", value = " red, orange, blue, blue, blue ")
+),
+
+#column( width = 3, offset = 0, style = 'padding-left:35px; padding-right:0px; padding-top:0px; padding-bottom:0px',
+(textInput(inputId = "userInput33", label = "Label", value = "Flatfish, Scorpaenids and Other, , ,  ")
+ 
+),
+
+style = "default",
+size = "normal",
+icon = NULL,
+label = "Relative biomass options",
+tooltip = FALSE,
+right = FALSE,
+up = FALSE,
+width = NULL,
+animate = animateOptions(
+  enter = "fadeInDown",
+  exit = "fadeOutUp",
+  duration = 0.25
+),
+inputId = NULL
+        ),
+
+
+),
+
+column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:190px; padding-top:25px; padding-bottom:0px',
 
 dropdown(
 
@@ -449,12 +516,6 @@ dropdown(
     shape = c("curve"),
     animation = "smooth",
     bigger = TRUE,
-  ),
-  
-  (textInput(inputId = "userInputX12", label = "X min and max", value = "0, 4")
-  ),
-  
-  (textInput(inputId = "userInputY12", label = "Y min and max", value = "0, 1.5")
   ),
 
   style = "default",
@@ -483,9 +544,9 @@ dropdown(
 
 ),
 
-column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:35px; padding-bottom:0px',
+#column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:35px; padding-bottom:0px',
 
-),
+#),
 
 column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; padding-top:25px; padding-bottom:0px',
         
