@@ -172,13 +172,17 @@ pickerInput(
   choices = c("B/BMSY proxy (Btarget)", "B/BMSY", "B/SPR target", "B/B0")
 ),
 
-(textInput(inputId = "userInputX1", label = "X min and max", value = "0, 4")
+(textInput(inputId = "userInputX1", label = "Min and max values", value = "0, 4")
 ),
 
 #dropdown(
   
+h4("\nBiomass Limit Reference Point (LRP)"),
+
+h5(tags$i("\nUp to 5 LRPs can be specified")),
+
   #column( width = 2, offset = 0, style = 'padding-left:120px; padding-right:0px; padding-top:0px; padding-bottom:0px',
-  (textInput(inputId = "userInput", label = "Position", value = "0.5, .62, , , ")
+  (textInput(inputId = "userInput", label = "LRP position relative to the target RP", value = "0.5, .62, , , ")
   ),
   
   #column( width = 2, offset = 0, style = 'padding-left:25px; padding-right:0px; padding-top:0px; padding-bottom:0px',
@@ -233,7 +237,7 @@ pickerInput(
   choices = c("F/Fmsy", "TM_ABC", "TM/OFL", "F/FMSY proxy", "(1-SPR)/(1-SPRtarget)"),
 ),
 
-(textInput(inputId = "userInputY1", label = "Y min and max", value = "0, 1.5")
+(textInput(inputId = "userInputY1", label = "Min and max values", value = "0, 1.5")
 ),
 
 style = "default",
@@ -321,8 +325,32 @@ column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; pad
 
 ),
 
+column( width = 2, offset = 0, style = 'padding-left:15px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+        
+fileInput(
+  inputId = "fileInput1",
+  label =  NULL,
+  multiple = FALSE,
+  accept = NULL,
+  width = NULL,
+  buttonLabel = "Browse...",
+  placeholder = "No file selected"
 )
 
+),
+
+column( width = 2, offset = 0, style = 'padding-left:30px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+        
+radioGroupButtons(
+  inputId = "customFile1",
+  #label = "Stock Assessment Years",
+  choices = c("Use default file", "Use custom file"),
+  direction = "horizontal",
+  selected = "Use default file"
+),
+
+)
+)
 ),
 
 tabPanel("Animation", div(plotlyOutput(outputId = "distPlot2", height = "100%"), align = "center") %>% withSpinner(color="#0dc5c1"),
@@ -433,7 +461,7 @@ pickerInput(
   choices = c("F/Fmsy", "TM_ABC", "TM/OFL", "F/FMSY proxy", "(1-SPR)/(1-SPRtarget)"),
 ),
 
-(textInput(inputId = "userInputY12", label = "Y min and max", value = "0, 1.5")
+(textInput(inputId = "userInputY12", label = "Min and max values", value = "0, 1.5")
 ),
 
 style = "default",
@@ -464,10 +492,14 @@ pickerInput(
   choices = c("B/BMSY proxy (Btarget)", "B/BMSY", "B/SPR target", "B/B0")
 ),
 
-(textInput(inputId = "userInputX12", label = "X min and max", value = "0, 4")
+(textInput(inputId = "userInputX12", label = "Min and max values", value = "0, 4")
 ),
 
-(textInput(inputId = "userInput12", label = "Position", value = "0.5, .62, , , ")
+h4("\nBiomass Limit Reference Point (LRP)"),
+
+h5(tags$i("\nUp to 5 LRPs can be specified")),
+
+(textInput(inputId = "userInput12", label = "LRP position relative to the target RP", value = "0.5, .62, , , ")
 ),
 
 #column( width = 2, offset = 0, style = 'padding-left:25px; padding-right:0px; padding-top:0px; padding-bottom:0px',
@@ -553,5 +585,37 @@ column( width = 1, offset = 0, style = 'padding-left:0px; padding-right:0px; pad
         downloadButton('downloadData2', 'Download Plot')
 
 ),
+
+column( width = 2, offset = 0, style = 'padding-left:15px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+        
+        fileInput(
+          inputId = "fileInput2",
+          label =  NULL,
+          multiple = FALSE,
+          accept = NULL,
+          width = NULL,
+          buttonLabel = "Browse...",
+          placeholder = "No file selected"
+        )
+        
+),
+
+column( width = 1, offset = 0, style = 'padding-left:30px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+        
+actionButton("clear2", "Reset File")
+
+),
+
+column( width = 2, offset = 0, style = 'padding-left:30px; padding-right:0px; padding-top:25px; padding-bottom:0px',
+        
+        radioGroupButtons(
+          inputId = "customFile2",
+          #label = "Stock Assessment Years",
+          choices = c("Use default file", "Use custom file"),
+          direction = "horizontal",
+          selected = "Use default file"
+        ),
+        
+)
 
 ) ) ) ) 

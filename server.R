@@ -18,14 +18,16 @@ library(png)
 library(shinycssloaders)
 library(grid)
 library(jpeg)
+library(shinyjs)
 
 quad.plot.WC <- data.frame(read.csv(paste0(getwd(), "/Fisheries_Updated_File.csv")))
 
 quad.plot.WCAnimation <- data.frame(read.csv(paste0(getwd(), "/Animation_Excel_File.csv")))
 
-function(input, output, session) {
+ function(input, output, session) {
 
   observe({
+   
     if (is.null(input$Flatfishes1) == FALSE) {
       updateAwesomeCheckbox(
         session = session,
@@ -141,32 +143,72 @@ function(input, output, session) {
                   }
 
                 })
+              
+              #observe({
+              
+              #if(){
+                observeEvent(input$clear2, {
+                #fileInput('fileInput2', label = NULL)
+                #rv$data <- NULL
+                reset('fileInput2')
+                #fileInput2 == N
+             
+              })
+                
+              #})
 
                 quad.plot.WC2 <- reactive({
+                     
+                  if(input$customFile1 == "Use custom file" && (is.null(input$fileInput1) == FALSE)){
+                    
+                       #if (is.null(input$fileInput1) == FALSE){
+                         
+                         inFile <- input$fileInput1
+                         
+                         quad.plot.WC <- data.frame(read.csv(inFile$datapath))
+                          
+                         a <-
+                           subset(
+                             quad.plot.WC,
+                             Abb2 %in% c(input$Flatfishes2, input$Scorpaenids2, input$Other2) &
+                               if(input$pointDelete == "Custom"){
+                                 Assessment_Year %in% c(input$checkGroup2)
+                               }
+                             
+                           
+                         
+                         else{
+                           Assessment_Year
+                         }
+                         
+                           )
+                         
+                       #}
+                    
+                  }
+                  
+                  else if(input$customFile1 == "Use default file" || (is.null(input$fileInput1) == TRUE)){
+                  
+                 #else if (is.null(input$fileInput1) == TRUE){
+                  
                   a <-
-                  subset(
-                    quad.plot.WC,
-                    Abb2 %in% c(input$Flatfishes2, input$Scorpaenids2, input$Other2) &
-                      if(input$pointDelete == "Custom"){
-                      Assessment_Year %in% c(input$checkGroup2)
+                    subset(
+                      quad.plot.WC,
+                      Abb2 %in% c(input$Flatfishes2, input$Scorpaenids2, input$Other2) &
+                        if(input$pointDelete == "Custom"){
+                          Assessment_Year %in% c(input$checkGroup2)
+                        }
+                      else{
+                        Assessment_Year
                       }
-                    else Assessment_Year
-
-                  )
-
+                      
+                    )
+                  
+                  #return(a)
+                  
+                 #}
+                  }
                   return(a)
-
-                })
-
-                quad.plot.WCAnimation2 <- reactive({
-                  b <-
-                  subset(
-                    quad.plot.WC,
-                    Abb2 %in% c(input$Flatfishes2, input$Scorpaenids2, input$Other2) &
-                    Assessment_Year %in% c(input$checkGroup2)
-                  )
-
-                  return(b)
 
                 })
 
@@ -358,11 +400,33 @@ function(input, output, session) {
                   
                   yValues <- as.list(strsplit(input$userInputY12, ",")[[1]])
 
+                  
+                    
+                  if(input$customFile2 == "Use custom file" && (is.null(input$fileInput2) == FALSE)){
+                    #if (is.null(input$fileInput2) == FALSE){
+                      
+                      inFile <- input$fileInput2
+                      
+                      quad.plot.WC <- data.frame(read.csv(inFile$datapath))
+                      
+                      quadAnimation <- subset(quad.plot.WC, Abb2 %in% c(input$Flatfishes4, input$Scorpaenids4, input$Other4))
+                      
+                    #}
+                }
+                
+                    #else{
+                else if(input$customFile2 == "Use default file" || (is.null(input$fileInput2) == TRUE)){
+                      quadAnimation <- subset(quad.plot.WCAnimation, Abb2 %in% c(input$Flatfishes4, input$Scorpaenids4, input$Other4))
+                    }
+                  
+                  
+                  
                   p <-
-                  #quad.plot.WCAnimation %>%
-                  plot_ly(
-                    #quad.plot.WCAnimation,
-                    subset(quad.plot.WCAnimation, Abb2 %in% c(input$Flatfishes4, input$Scorpaenids4, input$Other4)),
+                    #quad.plot.WCAnimation %>%
+                    plot_ly(
+                      #quad.plot.WCAnimation,
+                      quadAnimation,
+                    
                     x = ~B.Bmsy,
                     y = Var,
                     #size = ~pop,
