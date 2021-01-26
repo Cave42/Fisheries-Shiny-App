@@ -9,7 +9,7 @@ quad.plot.WC <- data.frame(read.csv(paste0(getwd(), "/Fisheries_Updated_File.csv
 fluidPage(
   theme = shinytheme("sandstone"),
 
-  navbarPage("Fisheries Shiny App"),
+  navbarPage("Stock Staus Quadplot-- measuring overfished and overfishing conditions across stocks and time"),
 
   tabsetPanel( type = "tabs", tabPanel("Plot", plotOutput(outputId = "distPlot") %>% withSpinner(color="#0dc5c1"),
 

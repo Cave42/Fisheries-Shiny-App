@@ -250,9 +250,10 @@ quad.plot.WCAnimation <- data.frame(read.csv(paste0(getwd(), "/Animation_Excel_F
                   #g <- ggplot(quad.plot.WC2()) +
                   xlim(as.numeric(xValues[[1]]), as.numeric(xValues[[2]])) +
                   ylim(as.numeric(yValues[[1]]), as.numeric(yValues[[2]])) +
+                  #theme()+
                   theme_light() +
                   geom_hline(yintercept = 1, lty = 2) +
-                  theme(legend.title = element_blank()) +
+                  theme(legend.title = element_blank(),axis.text=element_text(size=12),axis.title=element_text(size=14,face="bold"),legend.text=element_text(size=14)) +
                   guides(shape = guide_legend(override.aes = list(size = 4)))
 
                   vlineVariables <- as.list(strsplit(input$userInput, ",")[[1]])
@@ -269,18 +270,18 @@ quad.plot.WCAnimation <- data.frame(read.csv(paste0(getwd(), "/Animation_Excel_F
                     #lwd = c(1.25, 1.25, 1)
                   ) +
 
-                  geom_text(aes(x= as.numeric(vlineVariables[[1]])+.01, label=vlineNames[[1]], y=(as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2), colour=vlineColors[[1]], angle=90, text=element_text(size=11)) +
-                  geom_text(aes(x= as.numeric(vlineVariables[[2]])+.01, label=vlineNames[[2]], y=(as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2), colour=vlineColors[[2]], angle=90, text=element_text(size=11))+
+                  geom_text(aes(x= as.numeric(vlineVariables[[1]])+.01, label=vlineNames[[1]], y=(as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2), colour=vlineColors[[1]], angle=90, text=element_text(size=12)) +
+                  geom_text(aes(x= as.numeric(vlineVariables[[2]])+.01, label=vlineNames[[2]], y=(as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2), colour=vlineColors[[2]], angle=90, text=element_text(size=12))+
                   if(vlineVariables[[3]] != " "){
-                    geom_text(aes(x= as.numeric(vlineVariables[[3]])+.01, label=vlineNames[[3]], y=(as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2), colour=vlineColors[[3]], angle=90, text=element_text(size=11))
+                    geom_text(aes(x= as.numeric(vlineVariables[[3]])+.01, label=vlineNames[[3]], y=(as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2), colour=vlineColors[[3]], angle=90, text=element_text(size=12))
                   }
 
                   if(vlineVariables[[4]] != " "){
-                    g <- g + geom_text(aes(x= as.numeric(vlineVariables[[4]])+.01, label=vlineNames[[4]], y=(as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2), colour=vlineColors[[4]], angle=90, text=element_text(size=11))
+                    g <- g + geom_text(aes(x= as.numeric(vlineVariables[[4]])+.01, label=vlineNames[[4]], y=(as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2), colour=vlineColors[[4]], angle=90, text=element_text(size=12))
                   }
 
                   if(vlineVariables[[5]] != " "){
-                    g <- g + geom_text(aes(x= as.numeric(vlineVariables[[5]])+.01, label=vlineNames[[5]], y=(as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2), colour=vlineColors[[5]], angle=90, text=element_text(size=11))
+                    g <- g + geom_text(aes(x= as.numeric(vlineVariables[[5]])+.01, label=vlineNames[[5]], y=(as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2), colour=vlineColors[[5]], angle=90, text=element_text(size=12))
                   }
                   
                   if (input$Id073 == "F/Fmsy") {
