@@ -463,7 +463,7 @@ fluidPage(
         offset = 0,
         style = 'padding-left:60px; padding-right:0px; padding-top:55px; padding-bottom:0px',
 
-        downloadButton("downloadData3", "Download")
+        downloadButton("downloadData3", "Download Example File")
       )
 
     ),
@@ -843,7 +843,7 @@ fluidPage(
           offset = 0,
           style = 'padding-left:60px; padding-right:0px; padding-top:55px; padding-bottom:0px',
 
-          downloadButton("downloadData4", "Download")
+          downloadButton("downloadData4", "Download Example FIle")
         )
 
       )
