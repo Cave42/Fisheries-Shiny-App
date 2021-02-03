@@ -24,10 +24,14 @@ quad.plot.WC <- data.frame(read.csv(paste0(getwd(), "/Fisheries_Updated_File.csv
 
 quad.plot.WCAnimation <- data.frame(read.csv(paste0(getwd(), "/Animation_Excel_File.csv")))
 
- function(input, output, session) {
+ExampleFile1 <- data.frame(read.csv(paste0(getwd(), "/ExampleFile1.csv")))
+
+ExampleFileAnimation <- data.frame(read.csv(paste0(getwd(), "/Animation_Excel_File.csv")))
+
+function(input, output, session) {
 
   observe({
-   
+
     if (is.null(input$Flatfishes1) == FALSE) {
       updateAwesomeCheckbox(
         session = session,
@@ -143,78 +147,115 @@ quad.plot.WCAnimation <- data.frame(read.csv(paste0(getwd(), "/Animation_Excel_F
                   }
 
                 })
-              
-              #observe({
-              
-              #if(){
+
+                #observe({
+
+                #if(){
                 observeEvent(input$clear2, {
-                #fileInput('fileInput2', label = NULL)
-                #rv$data <- NULL
-                reset('fileInput2')
-                #fileInput2 == N
-             
-              })
-                
-              #})
+                  #fileInput('fileInput2', label = NULL)
+                  #rv$data <- NULL
+                  reset('fileInput2')
+                  #fileInput2 == N
+
+                })
+
+                #})
+
+                output$ui.action2 <- renderUI({
+                  if (is.null(input$fileInput1)) return()
+
+                  materialSwitch(
+                    inputId = "customFile1",
+                  )
+
+                })
+
+                output$ui.action <- renderUI({
+                  if (is.null(input$fileInput2)) return()
+
+                  materialSwitch(
+                    inputId = "customFile2",
+                  )
+
+                })
 
                 quad.plot.WC2 <- reactive({
-                     
-                  if(input$customFile1 == "Use custom file" && (is.null(input$fileInput1) == FALSE)){
-                    
-                       #if (is.null(input$fileInput1) == FALSE){
-                         
-                         inFile <- input$fileInput1
-                         
-                         quad.plot.WC <- data.frame(read.csv(inFile$datapath))
-                          
-                         a <-
-                           subset(
-                             quad.plot.WC,
-                             Abb2 %in% c(input$Flatfishes2, input$Scorpaenids2, input$Other2) &
-                               if(input$pointDelete == "Custom"){
-                                 Assessment_Year %in% c(input$checkGroup2)
-                               }
-                             
-                           
-                         
-                         else{
-                           Assessment_Year
-                         }
-                         
-                           )
-                         
-                       #}
-                    
-                  }
-                  
-                  else if(input$customFile1 == "Use default file" || (is.null(input$fileInput1) == TRUE)){
-                  
-                 #else if (is.null(input$fileInput1) == TRUE){
-                  
-                  a <-
+
+                  if(input$customFile1 == TRUE && (is.null(input$fileInput1) == FALSE)){
+
+                    #if (is.null(input$fileInput1) == FALSE){
+
+                    inFile <- input$fileInput1
+
+                    quad.plot.WC <- data.frame(read.csv(inFile$datapath))
+
+                    a <-
                     subset(
                       quad.plot.WC,
                       Abb2 %in% c(input$Flatfishes2, input$Scorpaenids2, input$Other2) &
-                        if(input$pointDelete == "Custom"){
-                          Assessment_Year %in% c(input$checkGroup2)
-                        }
+                      if(input$pointDelete == "Custom"){
+                        Assessment_Year %in% c(input$checkGroup2)
+                      }
+
+
+
                       else{
                         Assessment_Year
                       }
-                      
+
                     )
-                  
-                  #return(a)
-                  
-                 #}
+
+                    #}
+
+                  }
+
+                  else if(input$customFile1 == FALSE || (is.null(input$fileInput1) == TRUE)){
+
+                    #else if (is.null(input$fileInput1) == TRUE){
+
+                    a <-
+                    subset(
+                      quad.plot.WC,
+                      Abb2 %in% c(input$Flatfishes2, input$Scorpaenids2, input$Other2) &
+                      if(input$pointDelete == "Custom"){
+                        Assessment_Year %in% c(input$checkGroup2)
+                      }
+                      else{
+                        Assessment_Year
+                      }
+
+                    )
+
+                    #return(a)
+
+                    #}
                   }
                   return(a)
 
                 })
 
+                output$downloadData4 <- downloadHandler(
+                  filename = function() {
+                    paste("ExampleFileAnimation", ".csv", sep = "")
+                  },
+                  content = function(file) {
+                    write.csv(ExampleFileAnimation, file)
+                  }
+                )
+
+                output$downloadData3 <- downloadHandler(
+                  filename = function() {
+                    paste("ExampleFile", ".csv", sep = "")
+                  },
+                  content = function(file) {
+                    write.csv(ExampleFile1, file)
+                  }
+                )
+
+
                 output$distPlot <- renderPlot({
-                  
-                  
+
+
                   #remove rows that are not F/Fmsy
                   quad.plot.WC3 <- filter(quad.plot.WC2(), !is.na(F/Fmsy) | F/Fmsy != "")
                   #Most recent values only
@@ -228,22 +269,22 @@ quad.plot.WCAnimation <- data.frame(read.csv(paste0(getwd(), "/Animation_Excel_F
 
                   #Remove duplicates
                   quad.plot.WC6 <- quad.plot.WC6[!duplicated(quad.plot.WC6), ]
-                  
-                  
+
+
                   if(input$pointDelete == "Latest"){
                     dataEdit <- quad.plot.WC4
                   }
-                  
+
                   if(input$pointDelete == "First & Last"){
                     dataEdit <- quad.plot.WC6
                   }
-                  
+
                   if(input$pointDelete == "Custom" | input$pointDelete == "All" ){
                     dataEdit <- quad.plot.WC2()
                   }
-                  
+
                   xValues <- as.list(strsplit(input$userInputX1, ",")[[1]])
-                  
+
                   yValues <- as.list(strsplit(input$userInputY1, ",")[[1]])
 
                   g <- ggplot(dataEdit) +
@@ -283,7 +324,7 @@ quad.plot.WCAnimation <- data.frame(read.csv(paste0(getwd(), "/Animation_Excel_F
                   if(vlineVariables[[5]] != " "){
                     g <- g + geom_text(aes(x= as.numeric(vlineVariables[[5]])+.01, label=vlineNames[[5]], y=(as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2), colour=vlineColors[[5]], angle=90, text=element_text(size=12))
                   }
-                  
+
                   if (input$Id073 == "F/Fmsy") {
 
                     g <- g + aes(B.Bmsy, F.Fmsy) + labs(x = expression(bold("Relative Stock Status")), y = expression(bold("Fishing Intensity (F/Fmsy)")))
@@ -362,11 +403,11 @@ quad.plot.WCAnimation <- data.frame(read.csv(paste0(getwd(), "/Animation_Excel_F
                       ggsave(file, g, width = 18, height = 10)
                     }
                   )
-                  
-                g
-                
+
+                  g
+
                 })
-                
+
                 output$distPlot2 <- renderPlotly({
 
                   if (input$Id074 == "F/Fmsy") {
@@ -396,38 +437,37 @@ quad.plot.WCAnimation <- data.frame(read.csv(paste0(getwd(), "/Animation_Excel_F
                   else if(input$pointSize2 == "L"){
                     pointSze =15
                   }
-                  
+
                   xValues <- as.list(strsplit(input$userInputX12, ",")[[1]])
-                  
+
                   yValues <- as.list(strsplit(input$userInputY12, ",")[[1]])
 
-                  
-                    
-                  if(input$customFile2 == "Use custom file" && (is.null(input$fileInput2) == FALSE)){
+
+                  if(input$customFile2 == TRUE && (is.null(input$fileInput2) == FALSE)){
                     #if (is.null(input$fileInput2) == FALSE){
-                      
-                      inFile <- input$fileInput2
-                      
-                      quad.plot.WC <- data.frame(read.csv(inFile$datapath))
-                      
-                      quadAnimation <- subset(quad.plot.WC, Abb2 %in% c(input$Flatfishes4, input$Scorpaenids4, input$Other4))
-                      
+
+                    inFile <- input$fileInput2
+
+                    quad.plot.WC <- data.frame(read.csv(inFile$datapath))
+
+                    quadAnimation <- subset(quad.plot.WC, Abb2 %in% c(input$Flatfishes4, input$Scorpaenids4, input$Other4))
+
                     #}
-                }
-                
-                    #else{
-                else if(input$customFile2 == "Use default file" || (is.null(input$fileInput2) == TRUE)){
-                      quadAnimation <- subset(quad.plot.WCAnimation, Abb2 %in% c(input$Flatfishes4, input$Scorpaenids4, input$Other4))
-                    }
-                  
-                  
-                  
+                  }
+
+                  #else{
+                  else if(input$customFile2 == FALSE || (is.null(input$fileInput2) == TRUE)){
+                    quadAnimation <- subset(quad.plot.WCAnimation, Abb2 %in% c(input$Flatfishes4, input$Scorpaenids4, input$Other4))
+                  }
+
+
+
                   p <-
-                    #quad.plot.WCAnimation %>%
-                    plot_ly(
-                      #quad.plot.WCAnimation,
-                      quadAnimation,
-                    
+                  #quad.plot.WCAnimation %>%
+                  plot_ly(
+                    #quad.plot.WCAnimation,
+                    quadAnimation,
+
                     x = ~B.Bmsy,
                     y = Var,
                     #size = ~pop,
@@ -468,7 +508,7 @@ quad.plot.WCAnimation <- data.frame(read.csv(paste0(getwd(), "/Animation_Excel_F
                       p <- p %>% add_text(textposition = "top right", color = ~Abb2)
 
                     }
-              
+
                     p <- p %>% layout(xaxis = list(range = c(as.numeric(xValues[[1]]), as.numeric(xValues[[2]]))),
                     yaxis = list(range = c(as.numeric(yValues[[1]]), as.numeric(yValues[[2]]))))
 
@@ -502,18 +542,18 @@ quad.plot.WCAnimation <- data.frame(read.csv(paste0(getwd(), "/Animation_Excel_F
                     vlineVariables <- as.list(strsplit(input$userInput12, ",")[[1]])
                     vlineColors <- as.list(strsplit(input$userInput22, ",")[[1]])
                     vlineNames <- as.list(strsplit(input$userInput33, ",")[[1]])
-                    
+
                     if (input$squarePlot2 == F){
                       movement <- .01
                     }
                     if (input$squarePlot2 == T){
                       movement <- .05
                     }
-                    
+
                     p <- p %>% add_annotations(x = as.numeric(vlineVariables[[1]])+movement, y = (as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2 , text = vlineNames[[1]], font = list(color = vlineColors[[1]]), showarrow = F, textangle = 270)
-                    
+
                     p <- p %>% add_annotations(x = as.numeric(vlineVariables[[2]])+movement, y = (as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2, text = vlineNames[[2]], font = list(color = vlineColors[[2]]), showarrow = F, textangle = 270)
-                    
+
                     vline1 <- function(x = 0, color = vlineColors[[1]]) {
                       list(
                         type = "line",
@@ -537,24 +577,24 @@ quad.plot.WCAnimation <- data.frame(read.csv(paste0(getwd(), "/Animation_Excel_F
                         line = list(color = color)
                       )
                     }
-                    
+
                     if(vlineVariables[[3]] != " "){
-                    p <- p %>% add_annotations(x = as.numeric(vlineVariables[[3]])+.01, y = (as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2, text = vlineNames[[3]], font = list(color = vlineColors[[3]]), showarrow = F, textangle = 270)
-                    
-                    vline3 <- function(x = 0, color = vlineColors[[3]]) {
-                      list(
-                        type = "line",
-                        y0 = 0,
-                        y1 = 1,
-                        yref = "paper",
-                        x0 = vlineVariables[[3]],
-                        x1 = vlineVariables[[3]],
-                        line = list(color = color)
-                      )
-                    
+                      p <- p %>% add_annotations(x = as.numeric(vlineVariables[[3]])+.01, y = (as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2, text = vlineNames[[3]], font = list(color = vlineColors[[3]]), showarrow = F, textangle = 270)
+
+                      vline3 <- function(x = 0, color = vlineColors[[3]]) {
+                        list(
+                          type = "line",
+                          y0 = 0,
+                          y1 = 1,
+                          yref = "paper",
+                          x0 = vlineVariables[[3]],
+                          x1 = vlineVariables[[3]],
+                          line = list(color = color)
+                        )
+
+                      }
                     }
-                    }
-                    
+
                     else{vline3 <- function(y = 0, color = "black") {
                       list(
                         type = "line",
@@ -566,25 +606,25 @@ quad.plot.WCAnimation <- data.frame(read.csv(paste0(getwd(), "/Animation_Excel_F
                         line = list(color = color)
                       )}
                     }
-                    
+
                     if(vlineVariables[[4]] != " "){
-                    
-                    p <- p %>% add_annotations(x = as.numeric(vlineVariables[[4]])+.01, y = (as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2, text = vlineNames[[4]], font = list(color = vlineColors[[4]]), showarrow = F, textangle = 270)
-                    
-                    vline4 <- function(x = 0, color = vlineColors[[4]]) {
-                      list(
-                        type = "line",
-                        y0 = 0,
-                        y1 = 1,
-                        yref = "paper",
-                        x0 = vlineVariables[[4]],
-                        x1 = vlineVariables[[4]],
-                        line = list(color = color)
-                      )
-                    
+
+                      p <- p %>% add_annotations(x = as.numeric(vlineVariables[[4]])+.01, y = (as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2, text = vlineNames[[4]], font = list(color = vlineColors[[4]]), showarrow = F, textangle = 270)
+
+                      vline4 <- function(x = 0, color = vlineColors[[4]]) {
+                        list(
+                          type = "line",
+                          y0 = 0,
+                          y1 = 1,
+                          yref = "paper",
+                          x0 = vlineVariables[[4]],
+                          x1 = vlineVariables[[4]],
+                          line = list(color = color)
+                        )
+
+                      }
                     }
-                    }
-                    
+
                     else{vline4 <- function(y = 0, color = "black") {
                       list(
                         type = "line",
@@ -596,23 +636,23 @@ quad.plot.WCAnimation <- data.frame(read.csv(paste0(getwd(), "/Animation_Excel_F
                         line = list(color = color)
                       )}
                     }
-                    
+
                     if(vlineVariables[[5]] != " "){
-                    p <- p %>% add_annotations(x = as.numeric(vlineVariables[[5]])+.01, y = (as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2, text = vlineNames[[5]], font = list(color = vlineColors[[5]]), showarrow = F, textangle = 270)
-                    
-                    vline5 <- function(x = 0, color = vlineColors[[5]]) {
-                      list(
-                        type = "line",
-                        y0 = 0,
-                        y1 = 1,
-                        yref = "paper",
-                        x0 = vlineVariables[[5]],
-                        x1 = vlineVariables[[5]],
-                        line = list(color = color)
-                      )
+                      p <- p %>% add_annotations(x = as.numeric(vlineVariables[[5]])+.01, y = (as.numeric(yValues[[2]]) - as.numeric(yValues[[1]]))/2, text = vlineNames[[5]], font = list(color = vlineColors[[5]]), showarrow = F, textangle = 270)
+
+                      vline5 <- function(x = 0, color = vlineColors[[5]]) {
+                        list(
+                          type = "line",
+                          y0 = 0,
+                          y1 = 1,
+                          yref = "paper",
+                          x0 = vlineVariables[[5]],
+                          x1 = vlineVariables[[5]],
+                          line = list(color = color)
+                        )
+                      }
                     }
-                    }
-                    
+
                     else{
                       vline5 <- function(y = 0, color = "black") {
                         list(
@@ -649,10 +689,10 @@ quad.plot.WCAnimation <- data.frame(read.csv(paste0(getwd(), "/Animation_Excel_F
                         y1 = 1,
                         line = list(color = color)
                       )
-                      
+
                     }
-                    
-                      p <- p %>%
+
+                    p <- p %>%
                     layout(shapes = list(vline1(4), vline2(4),vline3(4), vline4(4), vline5, vline(4), hline(5)))
 
                     p <- p %>%
@@ -660,9 +700,9 @@ quad.plot.WCAnimation <- data.frame(read.csv(paste0(getwd(), "/Animation_Excel_F
                     # easing = "linear",
 
                     #if(input$DownloadPlot2 == 1){
-                      
+
                     #}
-                    
+
                     output$downloadData2 <- downloadHandler(
                       filename = function() {
                         "plotly.html"
